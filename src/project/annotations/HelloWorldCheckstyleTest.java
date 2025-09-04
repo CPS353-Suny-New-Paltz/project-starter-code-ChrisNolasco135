@@ -1,5 +1,5 @@
 package project.annotations;
 
 public class HelloWorldCheckstyleTest {
-	int x = 2
+	int x = 2;
 }
