@@ -5,4 +5,4 @@ This repo will start you off with an initial configuration that you'll modify as
 Checkpoint 2
 This system will recieve an numerical input and decode the input utilizing Caesar's Cipher with a shift of 7, if given an input of 1,24,5,5,8,0,16,8,11,5,23, will result in Hello World 
 
-![Image of System Diagram for this project](https://github.com/ChrisNolasco135/project-starter-code-ChrisNolasco135/blob/main/SystemDiagram.jpg?raw=true)
+![Image of System Diagram for this project](https://github.com/ChrisNolasco135/project-starter-code-ChrisNolasco135/blob/main/images/SystemDiagram.jpg?raw=true)
