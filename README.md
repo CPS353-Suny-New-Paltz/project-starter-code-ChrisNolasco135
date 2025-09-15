@@ -8,5 +8,4 @@ This system will recieve an numerical input and decode the input utilizing Caesa
 ![Image of System Diagram for this project](https://github.com/ChrisNolasco135/project-starter-code-ChrisNolasco135/blob/main/images/SystemDiagram.jpg?raw=true)
 
 ![Image of 
-Robot](https://github.com/kbrainard1/ExampleSiteHostin
- g/blob/main/images/automate.jpg?raw=true) 
+Robot](https://github.com/kbrainard1/ExampleSiteHosting/blob/main/images/automate.jpg?raw=true) 
