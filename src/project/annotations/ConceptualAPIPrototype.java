@@ -5,8 +5,14 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+@ConceptualAPIPrototype
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ConceptualAPIPrototype {
   // Marker annotation, should be applied to a method within a prototype class
+	public interface ComputationAPI{
+		void initializeJob(String jobName, int[] inputData);
+		int executeComputation();
+		void finalizeJob();
+	}
 }
