@@ -13,6 +13,9 @@ sourceSets {
 	  java {
 	     srcDirs = ['test']
 	  }
+	  test {
+    useJUnitPlatform()
+	}
 	 }
 }
 
