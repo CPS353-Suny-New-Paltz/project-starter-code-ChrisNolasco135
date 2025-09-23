@@ -5,8 +5,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+@NetworkAPI
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface NetworkAPI {
-  // Marker annotation, should be applied to an interface type
+	// Marker annotation, should be applied to an interface type
 }

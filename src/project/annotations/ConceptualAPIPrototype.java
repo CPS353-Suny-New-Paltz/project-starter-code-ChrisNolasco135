@@ -9,4 +9,9 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ConceptualAPIPrototype {
   // Marker annotation, should be applied to a method within a prototype class
+	public interface ComputationAPI{
+		void initializeJob(String jobName, int[] inputData);
+		int executeComputation();
+		void finalizeJob();
+	}
 }
