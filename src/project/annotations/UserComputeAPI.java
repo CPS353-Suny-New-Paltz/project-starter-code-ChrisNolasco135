@@ -1,5 +1,7 @@
 package project.annotations;
 
+import project.annotations.NetworkAPI;
+
 @NetworkAPI
 public interface UserComputeAPI {
 	void setInputSource(DataSource source);
