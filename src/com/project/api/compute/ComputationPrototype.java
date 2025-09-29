@@ -1,4 +1,6 @@
-package project.annotations;
+package com.project.api.compute;
+
+import project.annotations.ConceptualAPIPrototype;
 
 public class ComputationPrototype {
 	

@@ -1,4 +1,4 @@
-package project.annotations;
+package com.project.api.user;
 
 import project.annotations.NetworkAPI;
 

@@ -1,4 +1,6 @@
-package project.annotations;
+package com.project.api.compute;
+
+import project.annotations.ConceptualAPI;
 
 @ConceptualAPI
 public interface ComputationAPI {

@@ -1,4 +1,4 @@
-package project.annotations;
+package com.project.api.compute;
 
 public interface ComputeRequest {
 	int[] getInputData();
