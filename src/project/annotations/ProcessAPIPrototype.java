@@ -10,17 +10,5 @@ import java.util.List;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ProcessAPIPrototype {
 	// Marker annotation, should be applied to a method within a prototype class
-	public interface DataInput {
-		List<Integer> readIntegers() throws Exception;
-	}
-	public interface DataOutput {
-		void writeIntegers(List<Integer> data) throws Exception;
-	}
-	
-	public interface StorageComputeAPI{
-		void setInput(DataInput input);
-		void setOutput(DataOutput output);
-		void process() throws Exception;
-	}
 }
 
