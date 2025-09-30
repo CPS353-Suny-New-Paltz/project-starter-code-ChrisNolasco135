@@ -25,8 +25,7 @@ public class TestStatusCheckPR {
     private static final int NUM_CHECKS = 2;
     private static final String SUCCESS = "success";
     private static final String APPROVED = "APPROVED";
-    
-    @Test
+@Test
     public void testPullRequest() throws Exception {
         String baseApiPath = getBaseApiPath();
         String toCurl = baseApiPath + "pulls?state=all";
@@ -61,7 +60,7 @@ public class TestStatusCheckPR {
         return "https://api.github.com/repos/" + ownerRepo + "/";
                 
     }
-
+    
     private boolean hasReviewerApproval(String baseApiPath, String prNumber) throws Exception {
         String getReviews = baseApiPath + "pulls/" + prNumber + "/reviews";
         String reviewResult = curl(getReviews);
