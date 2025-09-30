@@ -1,6 +1,6 @@
 package main.java.api.compute;
 
-import main.java.project.annotations.ConceptualAPIPrototype;
+import project.annotations.ConceptualAPIPrototype;
 
 public class ComputationPrototype {
 	
