@@ -1,6 +1,6 @@
 package main.java.api.storage;
 
-import project.annotations.ProcessAPI;
+import main.java.project.annotations.ProcessAPI;
 
 @ProcessAPI
 public interface StorageComputeAPI {
