@@ -1,6 +1,6 @@
-package com.project.api.user;
+package main.java.api.user;
 
-import project.annotations.NetworkAPI;
+import main.java.project.annotations.NetworkAPI;
 
 @NetworkAPI
 public interface UserComputeAPI {

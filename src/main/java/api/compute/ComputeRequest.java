@@ -1,4 +1,4 @@
-package com.project.api.compute;
+package main.java.api.compute;
 
 public interface ComputeRequest {
 	int[] getInputData();

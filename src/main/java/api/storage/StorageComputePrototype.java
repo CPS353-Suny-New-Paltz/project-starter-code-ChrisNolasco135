@@ -1,6 +1,6 @@
-package com.project.api.storage;
+package main.java.api.storage;
 
-import project.annotations.ProcessAPIPrototype;
+import main.java.project.annotations.ProcessAPIPrototype;
 
 public class StorageComputePrototype {
 	@ProcessAPIPrototype
