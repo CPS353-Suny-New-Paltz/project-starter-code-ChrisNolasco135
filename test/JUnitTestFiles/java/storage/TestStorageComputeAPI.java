@@ -1,0 +1,34 @@
+package test.JUnitTestFiles.java.storage;
+
+import main.java.api.compute.ComputationAPI;
+
+import main.java.api.storage.DataBatch;
+import main.java.api.storage.StorageComputeImpl;
+
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class TestStorageComputeAPI {
+
+    @Test
+    void testReadDataReturnsEmptyList() {
+        ComputationAPI mockComp = Mockito.mock(ComputationAPI.class);
+        StorageComputeImpl storage = new StorageComputeImpl(mockComp);
+
+        DataBatch data = storage.readData();
+        assertTrue(data.isEmpty(), "Default readData should return empty list");
+    }
+
+    @Test
+    void testWriteDataReturnsFalseByDefault() {
+        ComputationAPI mockComp = Mockito.mock(ComputationAPI.class);
+        StorageComputeImpl storage = new StorageComputeImpl(mockComp);
+
+        boolean result = storage.writeData(List.of(1, 2, 3));
+        assertFalse(result, "Default writeData should return false");
+    }
+}
