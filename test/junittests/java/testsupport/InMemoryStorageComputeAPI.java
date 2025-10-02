@@ -21,7 +21,7 @@ public class InMemoryStorageComputeAPI implements StorageComputeAPI {
     }
 
     @Override
-    public boolean writeData(List<Integer> data) {
+    public boolean writeData(DataBatch data) {
         // Convert integers to strings and append to output list
         for (Integer num : data) {
             destination.addOutput(num.toString());
