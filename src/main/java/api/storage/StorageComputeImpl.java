@@ -1,6 +1,6 @@
 package main.java.api.storage;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 public class StorageComputeImpl implements StorageComputeAPI {
@@ -12,9 +12,9 @@ public class StorageComputeImpl implements StorageComputeAPI {
     }
 
     @Override
-    public DataBatch readData() {
+    public List<Integer> readData() {
         // Stub: return empty list
-        return (DataBatch) Collections.emptyList();
+        return new ArrayList<>();
     }
 
     @Override
