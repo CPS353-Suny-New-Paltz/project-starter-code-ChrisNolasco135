@@ -31,3 +31,9 @@ test {
     
     exclude '**/JUnitTestFiles/**'
 }
+
+test {
+    useJUnitPlatform {
+        excludeTags 'integration'
+    }
+}
