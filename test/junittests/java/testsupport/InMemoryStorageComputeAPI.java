@@ -15,13 +15,13 @@ public class InMemoryStorageComputeAPI implements StorageComputeAPI {
     }
 
     @Override
-    public DataBatch readData() {
+    public List<Integers> readData() {
         // Just return the in-memory input list
         return source.getInputData();
     }
 
     @Override
-    public void writeData(DataBatch data) {
+    public void writeData(List<Integers> data) {
         // Convert integers to strings and append to output list
         for (Integer num : data) {
             destination.addOutput(num.toString());
