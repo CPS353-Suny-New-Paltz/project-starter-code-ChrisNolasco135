@@ -1,6 +1,7 @@
 package test.junittests.java.testsupport;
 
 import main.java.api.storage.StorageComputeAPI;
+import main.java.api.storage.DataBatch;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class InMemoryStorageComputeAPI implements StorageComputeAPI {
     }
 
     @Override
-    public boolean writeData(Databatch data) {
+    public void writeData(DataBatch data) {
         // Convert integers to strings and append to output list
         for (Integer num : data) {
             destination.addOutput(num.toString());

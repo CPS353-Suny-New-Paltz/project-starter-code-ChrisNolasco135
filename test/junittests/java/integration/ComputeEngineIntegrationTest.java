@@ -6,11 +6,13 @@ import main.java.api.compute.ComputationImpl;
 import test.junittests.java.testsupport.InMemoryDataSource;
 import test.junittests.java.testsupport.InMemoryDataDestination;
 import test.junittests.java.testsupport.InMemoryStorageComputeAPI;
-import org.junit.jupiitTestter.api.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ComputeEngineIntegrationTest {
 
