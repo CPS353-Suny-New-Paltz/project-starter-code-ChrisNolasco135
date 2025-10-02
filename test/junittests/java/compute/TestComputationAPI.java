@@ -1,12 +1,13 @@
-package test.java.compute;
+package test.junittests.java.compute;
 
 import org.junit.jupiter.api.Test;
+
 
 import main.java.api.compute.ComputationImpl;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TestComputationAPI {
 

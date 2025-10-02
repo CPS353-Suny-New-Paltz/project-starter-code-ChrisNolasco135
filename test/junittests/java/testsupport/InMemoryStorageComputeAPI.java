@@ -1,6 +1,7 @@
-package test.JUnitTestFiles.java.testsupport;
+package test.junittests.java.testsupport;
 
 import main.java.api.storage.StorageComputeAPI;
+
 import java.util.List;
 
 public class InMemoryStorageComputeAPI implements StorageComputeAPI {

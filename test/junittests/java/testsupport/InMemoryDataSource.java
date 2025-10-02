@@ -1,4 +1,4 @@
-package test.JUnitTestFiles.java.testsupport;
+package test.junittests.java.testsupport;
 
 import main.java.api.user.DataSource;
 

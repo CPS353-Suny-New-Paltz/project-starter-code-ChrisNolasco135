@@ -1,11 +1,12 @@
-package test.JUnitTestFiles.java.integration;
+package test.junittests.java.integration;
 
-import main.java.api.user.*;
-
-import main.java.api.storage.*;
-import main.java.api.compute.*;
-import test.JUnitTestFiles.java.testsupport.*;
-import org.junit.jupiter.api.Test;
+import main.java.api.user.UserComputeImpl;
+import main.java.api.storage.StorageComputeAPI;
+import main.java.api.compute.ComputationImpl;
+import test.junittests.java.testsupport.InMemoryDataSource;
+import test.junittests.java.testsupport.InMemoryDataDestination;
+import test.junittests.java.testsupport.InMemoryStorageComputeAPI
+import org.junit.jupiitTestter.api.Test;
 
 import java.util.List;
 

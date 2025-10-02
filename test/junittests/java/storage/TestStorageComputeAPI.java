@@ -1,6 +1,7 @@
-package test.JUnitTestFiles.java.storage;
+package test.junittests.java.storage;
 
 import main.java.api.compute.ComputationAPI;
+
 
 import main.java.api.storage.DataBatch;
 import main.java.api.storage.StorageComputeImpl;
@@ -10,7 +11,7 @@ import org.mockito.Mockito;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TestStorageComputeAPI {
 

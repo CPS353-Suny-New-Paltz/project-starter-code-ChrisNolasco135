@@ -1,6 +1,7 @@
-package test.JUnitTestFiles.java.user;
+package test.junittests.java.user;
 
 import main.java.api.storage.StorageComputeAPI;
+
 
 import main.java.api.user.DataDestination;
 import main.java.api.user.DataSource;
@@ -11,7 +12,7 @@ import org.mockito.Mockito;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TestUserComputeAPI {
 
