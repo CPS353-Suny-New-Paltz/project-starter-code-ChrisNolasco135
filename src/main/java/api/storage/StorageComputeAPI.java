@@ -8,5 +8,5 @@ import project.annotations.ProcessAPI;
 @ProcessAPI
 public interface StorageComputeAPI {
 	List<Integer> readData();         // storage → compute
-    void writeData(List<Integer> data); // compute → storage
+    boolean writeData(List<Integer> data); // compute → storage
 }

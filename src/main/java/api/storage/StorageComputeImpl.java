@@ -23,9 +23,4 @@ public class StorageComputeImpl implements StorageComputeAPI {
         return false;
     }
 
-	@Override
-	public void writeData(DataBatch data) {
-		// TODO Auto-generated method stub
-		
-	}
 }
