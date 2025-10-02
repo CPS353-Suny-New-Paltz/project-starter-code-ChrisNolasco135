@@ -5,7 +5,7 @@ import main.java.api.storage.StorageComputeAPI;
 import main.java.api.compute.ComputationImpl;
 import test.junittests.java.testsupport.InMemoryDataSource;
 import test.junittests.java.testsupport.InMemoryDataDestination;
-import test.junittests.java.testsupport.InMemoryStorageComputeAPI
+import test.junittests.java.testsupport.InMemoryStorageComputeAPI;
 import org.junit.jupiitTestter.api.Test;
 
 import java.util.List;
