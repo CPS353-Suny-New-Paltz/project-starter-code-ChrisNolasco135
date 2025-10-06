@@ -1,5 +1,7 @@
 package main.java.api.user;
 
+import java.util.List;
+
 import project.annotations.NetworkAPI;
 
 @NetworkAPI
@@ -12,4 +14,8 @@ public interface UserComputeAPI {
     void setDelimiters(String delimiter);
 
     void executeJob();
+
+	boolean submitJob(DataSource source, DataDestination destination, String delimiter);
+
+	List<String> getResults();
 }
