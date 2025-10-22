@@ -4,12 +4,27 @@ import project.annotations.NetworkAPIPrototype;
 
 public class UserComputePrototype {
 	@NetworkAPIPrototype
-        // returning a stub/prototype (not fully implemented yet)
 		public void prototype(UserComputeAPI userComputeAPI) {
-			//Methods the client will use when using the the API
-			//setInputSource();
-			//setInputDestination();
-			//setDelimeters();
-			//executeJob();
+			
         }
+	
+		public DataSource setInputSource(DataSource source) {
+			return source;
+		}
+		
+		public DataDestination setOutputDestination(DataDestination destination) {
+			return destination;
+		}
+		
+		public String setDelimiters(String delimiter) {	
+			return delimiter;
+		}
+		
+		public boolean submitJob(DataSource source, DataDestination destination, String delimiter) {
+			return false;
+		}
+		
+		public DataSource executeJob(DataSource source) {
+			return source;
+		}
     }

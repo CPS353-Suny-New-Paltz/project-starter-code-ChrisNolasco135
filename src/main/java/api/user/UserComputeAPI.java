@@ -6,16 +6,18 @@ import project.annotations.NetworkAPI;
 
 @NetworkAPI
 public interface UserComputeAPI {
-	void setInputSource(DataSource source);
+	
+	DataSource setInputSource(DataSource source);
 
-    void setOutputDestination(DataDestination destination);
+    DataDestination setOutputDestination(DataDestination destination);
 
     // If user doesn’t call this, defaults will be applied
-    void setDelimiters(String delimiter);
+    String setDelimiters(String delimiter);
 
-    void executeJob();
+    DataSource executeJob(DataSource source);
 
 	boolean submitJob(DataSource source, DataDestination destination, String delimiter);
 
 	List<String> getResults();
+
 }

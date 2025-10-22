@@ -1,12 +1,19 @@
 package main.java.api.storage;
 
 import project.annotations.ProcessAPIPrototype;
+import java.util.List;
 
 public class StorageComputePrototype {
 	@ProcessAPIPrototype
 	public void prototype(StorageComputeAPI storageComputeAPI) {
-		//Methods the database will use to interact with the compute engine
-		//readData();
-		//writeData();
+		
+	}
+	
+	public java.util.List<Integer> readData(DataBatch data) {
+		return readData(data);
+	}
+	
+	public boolean writeData(List<Integer> data) {
+		return writeData(data);
 	}
 }
