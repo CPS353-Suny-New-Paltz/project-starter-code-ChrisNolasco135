@@ -12,7 +12,7 @@ public class StorageComputeImpl implements StorageComputeAPI {
     }
 
     @Override
-    public List<Integer> readData() {
+    public List<Integer> readData(DataBatch data) {
         // Stub: return empty list
         return new ArrayList<>();
     }

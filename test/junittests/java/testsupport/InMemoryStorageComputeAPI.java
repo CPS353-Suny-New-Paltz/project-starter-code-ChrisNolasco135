@@ -15,8 +15,8 @@ public class InMemoryStorageComputeAPI implements StorageComputeAPI {
     }
 
     @Override
-    public List<Integer> readData() {
-        // Just return the in-memory input list
+    public List<Integer> readData(DataBatch data) {
+        // Just return the in-memory input list;
         return source.getInputData();
     }
 

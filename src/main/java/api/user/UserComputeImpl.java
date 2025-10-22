@@ -25,26 +25,28 @@ public class UserComputeImpl implements UserComputeAPI {
     }
 
 	@Override
-	public void setInputSource(DataSource source) {
+	public DataSource setInputSource(DataSource source) {
+		return source;
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void setOutputDestination(DataDestination destination) {
+	public DataDestination setOutputDestination(DataDestination destination) {
+		return destination;
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void setDelimiters(String delimiter) {
-		// TODO Auto-generated method stub
+	public String setDelimiters(String delimiter) {
+		return delimiter;
 		
 	}
 
 	@Override
-	public void executeJob() {
+	public DataSource executeJob(DataSource source) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 }
