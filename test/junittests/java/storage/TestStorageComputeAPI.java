@@ -21,7 +21,7 @@ class TestStorageComputeAPI {
         ComputationAPI mockComp = Mockito.mock(ComputationAPI.class);
         StorageComputeImpl storage = new StorageComputeImpl(mockComp);
 
-        List<Integer> data = storage.readData(DataBatch.EMPTY);
+        List<Integer> data = storage.readData(DataBatch source);
         assertTrue(data.isEmpty(), "Default readData should return empty list");
     }
 
