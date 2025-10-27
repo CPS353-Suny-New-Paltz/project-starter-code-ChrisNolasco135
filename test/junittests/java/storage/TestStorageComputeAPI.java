@@ -4,8 +4,8 @@ import main.java.api.compute.ComputationAPI;
 
 
 
-import main.java.api.storage.DataBatch;
-import main.java.api.storage.StorageComputeImpl;
+import storage.DataBatch;
+import storage.StorageComputeImpl;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
