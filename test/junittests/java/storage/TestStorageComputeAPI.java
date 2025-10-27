@@ -1,10 +1,11 @@
 package test.junittests.java.storage;
 
-import main.java.api.compute.ComputationAPI;
+import compute.ComputationAPI;
 
 
-import main.java.api.storage.DataBatch;
-import main.java.api.storage.StorageComputeImpl;
+
+import storage.DataBatch;
+import storage.StorageComputeImpl;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

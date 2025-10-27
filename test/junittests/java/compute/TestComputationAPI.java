@@ -2,8 +2,7 @@ package test.junittests.java.compute;
 
 import org.junit.jupiter.api.Test;
 
-
-import main.java.api.compute.ComputationImpl;
+import compute.ComputationImpl;
 
 import java.util.List;
 

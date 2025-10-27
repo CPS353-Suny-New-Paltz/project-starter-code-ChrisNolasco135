@@ -1,7 +1,7 @@
 package test.junittests.java.testsupport;
 
-import main.java.api.storage.StorageComputeAPI;
-import main.java.api.storage.DataBatch;
+import storage.StorageComputeAPI;
+import storage.DataBatch;
 
 import java.util.List;
 
