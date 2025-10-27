@@ -1,11 +1,11 @@
 package test.junittests.java.user;
 
-import main.java.api.storage.StorageComputeAPI;
+import storage.StorageComputeAPI;
 
 
-import main.java.api.user.DataDestination;
-import main.java.api.user.DataSource;
-import main.java.api.user.UserComputeImpl;
+import user.DataDestination;
+import user.DataSource;
+import user.UserComputeImpl;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

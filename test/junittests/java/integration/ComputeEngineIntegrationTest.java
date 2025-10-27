@@ -1,8 +1,9 @@
 package test.junittests.java.integration;
 
-import main.java.api.user.UserComputeImpl;
-import main.java.api.storage.StorageComputeAPI;
-import main.java.api.compute.ComputationImpl;
+import user.UserComputeImpl;
+
+import storage.StorageComputeAPI;
+import compute.ComputationImpl;
 import test.junittests.java.testsupport.InMemoryDataSource;
 import test.junittests.java.testsupport.InMemoryDataDestination;
 import test.junittests.java.testsupport.InMemoryStorageComputeAPI;

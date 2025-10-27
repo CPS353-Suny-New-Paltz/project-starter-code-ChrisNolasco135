@@ -1,6 +1,6 @@
 package test.junittests.java.testsupport;
 
-import main.java.api.user.DataSource;
+import user.DataSource;
 
 import java.util.List;
 

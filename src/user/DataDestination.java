@@ -1,4 +1,4 @@
-package main.java.api.user;
+package user;
 
 public interface DataDestination {
 	String getIdentifier();

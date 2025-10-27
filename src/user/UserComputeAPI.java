@@ -1,4 +1,4 @@
-package main.java.api.user;
+package user;
 
 import java.util.List;
 

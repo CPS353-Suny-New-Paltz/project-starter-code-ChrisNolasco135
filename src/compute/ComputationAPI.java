@@ -1,4 +1,4 @@
-package main.java.api.compute;
+package compute;
 
 import java.util.List;
 
