@@ -1,6 +1,6 @@
 package test.junittests.java.testsupport;
 
-import main.java.api.user.DataDestination;
+import user.DataDestination;
 import java.util.ArrayList;
 import java.util.List;
 
