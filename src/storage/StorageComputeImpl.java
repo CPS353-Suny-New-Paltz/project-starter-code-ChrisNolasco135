@@ -1,13 +1,13 @@
-package main.java.api.storage;
+package storage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class StorageComputeImpl implements StorageComputeAPI {
     // Dependencies (might need to call computation later)
-    private main.java.api.compute.ComputationAPI computationAPI;
+    private compute.ComputationAPI computationAPI;
 
-    public StorageComputeImpl(main.java.api.compute.ComputationAPI computationAPI) {
+    public StorageComputeImpl(compute.ComputationAPI computationAPI) {
         this.computationAPI = computationAPI;
     }
 

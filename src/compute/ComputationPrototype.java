@@ -1,4 +1,4 @@
-package main.java.api.compute;
+package compute;
 
 import project.annotations.ConceptualAPIPrototype;
 import java.util.List;
