@@ -1,4 +1,4 @@
-package main.java.api.user;
+package user;
 
 import java.util.Collections;
 
@@ -6,9 +6,9 @@ import java.util.List;
 
 public class UserComputeImpl implements UserComputeAPI {
     // Dependencies (talking to storage)
-    private main.java.api.storage.StorageComputeAPI storageAPI;
+    private storage.StorageComputeAPI storageAPI;
 
-    public UserComputeImpl(main.java.api.storage.StorageComputeAPI storageAPI) {
+    public UserComputeImpl(storage.StorageComputeAPI storageAPI) {
         this.storageAPI = storageAPI;
     }
 

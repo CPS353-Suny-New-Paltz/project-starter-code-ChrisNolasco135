@@ -1,4 +1,4 @@
-package main.java.api.storage;
+package storage;
 
 import java.util.List;
 
