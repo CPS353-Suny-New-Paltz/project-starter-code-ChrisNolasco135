@@ -1,6 +1,6 @@
 package test.junittests.java.storage;
 
-import main.java.api.compute.ComputationAPI;
+import compute.ComputationAPI;
 
 
 
