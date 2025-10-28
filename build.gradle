@@ -29,4 +29,12 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    
+    exclude '**/JUnitTestFiles/**'
+}
+
+test {
+    useJUnitPlatform {
+        excludeTags 'integration'
+    }
 }
