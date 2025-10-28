@@ -1,4 +1,4 @@
-package test.junittests.java.storage;
+package storage;
 
 import compute.ComputationAPI;
 
