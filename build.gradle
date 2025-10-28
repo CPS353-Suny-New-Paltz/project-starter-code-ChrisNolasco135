@@ -29,8 +29,6 @@ dependencies {
 
 test {
     useJUnitPlatform()
-    
-    exclude '**/JUnitTestFiles/**'
 }
 
 test {
