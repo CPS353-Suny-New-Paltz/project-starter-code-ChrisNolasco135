@@ -1,4 +1,4 @@
-package test.junittests.java.compute;
+package compute;
 
 import org.junit.jupiter.api.Test;
 
