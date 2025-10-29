@@ -1,4 +1,4 @@
-package test.junittests.java.testsupport;
+package testsupport;
 
 import user.DataDestination;
 import java.util.ArrayList;

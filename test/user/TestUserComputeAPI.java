@@ -1,4 +1,4 @@
-package test.junittests.java.user;
+package user;
 
 import storage.StorageComputeAPI;
 
