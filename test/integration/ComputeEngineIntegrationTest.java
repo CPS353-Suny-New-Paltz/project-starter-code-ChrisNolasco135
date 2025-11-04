@@ -2,8 +2,6 @@ package integration;
 
 import user.UserComputeImpl;
 
-import storage.StorageComputeAPI;
-import compute.ComputationImpl;
 import testsupport.InMemoryDataSource;
 import testsupport.InMemoryDataDestination;
 import testsupport.InMemoryStorageComputeAPI;
@@ -27,7 +25,6 @@ class ComputeEngineIntegrationTest {
         InMemoryDataDestination output = new InMemoryDataDestination();
 
         // Wire up storage and compute components
-        ComputationImpl computation = new ComputationImpl();
         InMemoryStorageComputeAPI storage = new InMemoryStorageComputeAPI(input, output);
         UserComputeImpl userCompute = new UserComputeImpl(storage);
 
