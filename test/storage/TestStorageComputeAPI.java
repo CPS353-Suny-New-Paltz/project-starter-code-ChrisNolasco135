@@ -2,7 +2,6 @@ package storage;
 
 import org.junit.jupiter.api.Test;
 import compute.ComputationAPI;
-
 import org.mockito.Mockito;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -10,8 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class TestStorageComputeAPI {
     @Test
-    void testReadDataWithMockedAPI() {
-    	ComputationAPI mockComp = Mockito.mock(ComputationAPI.class);
+    void testReadDataReturnsEmptyList() {
+        ComputationAPI mockComp = Mockito.mock(ComputationAPI.class);
         StorageComputeImpl storage = new StorageComputeImpl(mockComp);
 
         // Use Mockito to mock DataBatch
@@ -32,5 +31,3 @@ class TestStorageComputeAPI {
         assertFalse(result, "Default writeData should return false");
     }
 }
-
-
