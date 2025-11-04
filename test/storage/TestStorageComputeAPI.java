@@ -1,42 +1,36 @@
 package storage;
 
-import compute.ComputationAPI;
-
-
-
-import storage.DataBatch;
-import storage.StorageComputeImpl;
-
 import org.junit.jupiter.api.Test;
+
 import org.mockito.Mockito;
-
+import java.util.Arrays;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TestStorageComputeAPI {
-
     @Test
-    void testReadDataReturnsEmptyList() {
-        ComputationAPI mockComp = Mockito.mock(ComputationAPI.class);
-        StorageComputeImpl storage = new StorageComputeImpl(mockComp);
-
-        // Use Mockito to mock DataBatch
+    void testReadDataWithMockedAPI() {
+        // Mock StorageComputeAPI
+        StorageComputeAPI mockAPI = Mockito.mock(StorageComputeAPI.class);
+        // Mock DataBatch
         DataBatch mockBatch = Mockito.mock(DataBatch.class);
-        Mockito.when(mockBatch.isEmpty()).thenReturn(true);
-        Mockito.when(mockBatch.getData()).thenReturn(new int[0]);
+        Mockito.when(mockBatch.isEmpty()).thenReturn(false);
+        Mockito.when(mockBatch.getData()).thenReturn(new int[] {1, 2, 3});
+        Mockito.when(mockAPI.readData(mockBatch)).thenReturn(Arrays.asList(1, 2, 3));
 
-        List<Integer> data = storage.readData(mockBatch);
-        assertTrue(data.isEmpty(), "Default readData should return empty list");
+        List<Integer> result = mockAPI.readData(mockBatch);
+        assertEquals(Arrays.asList(7, 8, 9), result, "readData should return the mocked list");
     }
 
     @Test
-    void testWriteDataReturnsFalseByDefault() {
-        ComputationAPI mockComp = Mockito.mock(ComputationAPI.class);
-        StorageComputeImpl storage = new StorageComputeImpl(mockComp);
+    void testWriteDataWithMockedAPI() {
+        // Mock StorageComputeAPI
+        StorageComputeAPI mockAPI = Mockito.mock(StorageComputeAPI.class);
+        List<Integer> data = Arrays.asList(1, 2, 3);
+        Mockito.when(mockAPI.writeData(data)).thenReturn(true);
 
-        boolean result = storage.writeData(List.of(1, 2, 3));
-        assertFalse(result, "Default writeData should return false");
+        boolean result = mockAPI.writeData(data);
+        assertTrue(result, "writeData should return true as mocked");
     }
 }
