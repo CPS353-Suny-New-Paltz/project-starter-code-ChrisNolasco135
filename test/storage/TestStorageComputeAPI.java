@@ -20,7 +20,7 @@ class TestStorageComputeAPI {
         Mockito.when(mockAPI.readData(mockBatch)).thenReturn(Arrays.asList(1, 2, 3));
 
         List<Integer> result = mockAPI.readData(mockBatch);
-        assertEquals(Arrays.asList(7, 8, 9), result, "readData should return the mocked list");
+        assertEquals(Arrays.asList(1, 2, 3), result, "readData should return the mocked list");
     }
 
     @Test
