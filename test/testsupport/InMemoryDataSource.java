@@ -1,7 +1,6 @@
 package testsupport;
 
 import user.DataSource;
-
 import java.util.List;
 
 public class InMemoryDataSource implements DataSource {
