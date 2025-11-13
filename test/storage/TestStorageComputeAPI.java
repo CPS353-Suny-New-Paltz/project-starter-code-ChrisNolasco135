@@ -2,6 +2,8 @@ package storage;
 
 import org.junit.jupiter.api.Test;
 import compute.ComputationAPI;
+import user.DataSource;
+
 import org.mockito.Mockito;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -14,9 +16,8 @@ class TestStorageComputeAPI {
         StorageComputeImpl storage = new StorageComputeImpl(mockComp);
 
         // Use Mockito to mock DataBatch
-        DataBatch mockBatch = Mockito.mock(DataBatch.class);
-        Mockito.when(mockBatch.isEmpty()).thenReturn(true);
-        Mockito.when(mockBatch.getData()).thenReturn(new int[0]);
+        DataSource mockBatch = Mockito.mock(DataSource.class);
+        Mockito.when(mockBatch.getIdentifier()).thenReturn("FilePath");
 
         List<Integer> data = storage.readData(mockBatch);
         assertTrue(data.isEmpty(), "Default readData should return empty list");

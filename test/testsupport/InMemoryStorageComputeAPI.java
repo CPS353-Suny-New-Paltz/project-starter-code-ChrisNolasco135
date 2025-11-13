@@ -2,7 +2,7 @@ package testsupport;
 
 
 import storage.StorageComputeAPI;
-import storage.DataBatch;
+import user.DataSource;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class InMemoryStorageComputeAPI implements StorageComputeAPI {
     }
 
     @Override
-    public List<Integer> readData(DataBatch data) {
+    public List<Integer> readData(DataSource data) {
         // Just return the in-memory input list;
         return source.getInputData();
     }

@@ -18,7 +18,7 @@ public class ComputationPrototype {
 		ComputeResult result = computationAPI.compute(request);
 
 		// Process and print the output data
-		int[] output = result.getOutputData();
+		String output = result.getOutputData();
 		System.out.println("ComputeResult output:");
 		System.out.println(output);
     }
