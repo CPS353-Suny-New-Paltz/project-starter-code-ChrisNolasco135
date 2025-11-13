@@ -30,22 +30,22 @@ public class StorageComputeImpl implements StorageComputeAPI {
     public List<Integer> readData(DataSource data) {
         String filePath = getFilePath(data);
         List<Integer> result = new ArrayList<>();
-        if (filePath == null) return result;
-        try (BufferedReader reader = Files.newBufferedReader(Paths.get(filePath))) {
+        if (filePath == null) {
+        	return result;
+        }
+        try(BufferedReader reader = Files.newBufferedReader(Paths.get(filePath))) {; 
             String line;
             while ((line = reader.readLine()) != null) {
                 for (String part : line.split("[ ,;\t]+")) {
-                    try {
-                        result.add(Integer.parseInt(part.trim()));
-                    } catch (NumberFormatException ignored) {}
+                   result.add(Integer.parseInt(part.trim()));
                 }
             }
-        } catch (IOException e) {
-        	
+        }catch (IOException e) {
+            	return null;
+            }
+            return result;
         }
-        return result;
-    }
-
+        
     @Override
     public boolean writeData(List<Integer> data) {
         if (destination == null) return false;
