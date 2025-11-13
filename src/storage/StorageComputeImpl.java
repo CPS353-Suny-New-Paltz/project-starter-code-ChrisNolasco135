@@ -40,8 +40,8 @@ public class StorageComputeImpl implements StorageComputeAPI {
                    result.add(Integer.parseInt(part.trim()));
                 }
             }
-        }catch (IOException e) {
-            	return null;
+        }catch (IOException | NullPointerException e) {
+            	return new ArrayList<>();
             }
             return result;
         }
