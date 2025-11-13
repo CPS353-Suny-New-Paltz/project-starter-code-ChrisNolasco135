@@ -49,14 +49,16 @@ public class StorageComputeImpl implements StorageComputeAPI {
     @Override
     public boolean writeData(List<Integer> data) {
         if (destination == null) {
-        	return false;
+            return false;
         }
         String filePath = destination.getIdentifier();
         try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filePath))) {
-            for (Integer i : data) {
-                writer.write(i.toString());
-                writer.write(" ");
-            }
+            // Write all integers as a single comma-separated line
+            String line = data.stream()
+                .map(Object::toString)
+                .reduce((a, b) -> a + delimiter + b)
+                .orElse("");
+            writer.write(line);
             writer.newLine();
         } catch (IOException e) {
             return false;
