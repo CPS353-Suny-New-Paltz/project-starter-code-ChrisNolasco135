@@ -2,10 +2,11 @@ package compute;
 
 import org.junit.jupiter.api.Test;
 
+
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TestComputationAPI {
 
@@ -16,8 +17,8 @@ class TestComputationAPI {
             public ComputeResult compute(ComputeRequest request) {
                 return new ComputeResult() {
                     @Override
-                    public int[] getOutputData() {
-                        return new int[] {1, 2, 3};
+                    public String getOutputData() {
+                        return new String("TEST");
                     }
                 };
             }
@@ -33,6 +34,6 @@ class TestComputationAPI {
             }
         };
         ComputeResult result = mockApi.compute(mockRequest);
-        assertTrue(Arrays.equals(result.getOutputData(), new int[] {1, 2, 3}), "compute should return expected output data");
+        assertEquals("TEST", result.getOutputData(), "compute should return expected output data");
     }
 }
