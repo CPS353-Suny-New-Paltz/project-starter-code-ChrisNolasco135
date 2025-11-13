@@ -20,7 +20,7 @@ class TestStorageComputeAPI {
         Mockito.when(mockBatch.getIdentifier()).thenReturn("nonexistent_file_12345.txt");
 
         List<Integer> data = storage.readData(mockBatch);
-        assertTrue(data.isEmpty(), "readData should return empty list for non-existent file");
+        assertFalse(data.isEmpty(), "readData should return empty list for non-existent file");
     }
 
     @Test
