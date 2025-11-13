@@ -33,8 +33,7 @@ public class StorageComputeImpl implements StorageComputeAPI {
         if (filePath == null) {
         	return result;
         }
-        try(BufferedReader reader = Files.newBufferedReader(Paths.get(filePath))) 
-        {
+        try(BufferedReader reader = Files.newBufferedReader(Paths.get(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 for (String part : line.split("[ ,;\t]+")) {
