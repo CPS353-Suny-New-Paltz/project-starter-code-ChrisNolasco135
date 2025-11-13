@@ -9,7 +9,8 @@ public class ComputationImpl implements ComputationAPI {
 
     @Override
     public List<Integer> processJob(List<Integer> inputData) {
-        return Collections.emptyList();
+        // For testing, just return the input data unchanged
+        return inputData;
     }
 
 	@Override

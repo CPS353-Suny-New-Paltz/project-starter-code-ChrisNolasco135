@@ -27,7 +27,9 @@ class TestStorageComputeAPI {
     void testWriteDataReturnsFalseByDefault() {
         ComputationAPI mockComp = Mockito.mock(ComputationAPI.class);
         StorageComputeImpl storage = new StorageComputeImpl(mockComp);
-
+        user.DataDestination mockDestination = Mockito.mock(user.DataDestination.class);
+        Mockito.when(mockDestination.getIdentifier()).thenReturn("FilePath");
+        storage.setDestination(mockDestination);
         boolean result = storage.writeData(List.of(1, 2, 3));
         assertFalse(result, "Default writeData should return false");
     }
