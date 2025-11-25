@@ -16,9 +16,9 @@ public class UserComputeImpl implements UserComputeAPI {
     @Override
     public boolean submitJob(DataSource source, DataDestination destination, String delimiter) {
         try {
-            if (source == null) throw new IllegalArgumentException("DataSource must not be null");
-            if (destination == null) throw new IllegalArgumentException("DataDestination must not be null");
-            if (delimiter == null || delimiter.isEmpty()) throw new IllegalArgumentException("Delimiter must not be null or empty");
+            if (source == null) { throw new IllegalArgumentException("DataSource must not be null"); }
+            if (destination == null) { throw new IllegalArgumentException("DataDestination must not be null"); }
+            if (delimiter == null || delimiter.isEmpty()) { throw new IllegalArgumentException("Delimiter must not be null or empty"); }
             setInputSource(source);
             setOutputDestination(destination);
             setDelimiters(delimiter);
@@ -58,7 +58,7 @@ public class UserComputeImpl implements UserComputeAPI {
 	@Override
 	public DataSource setInputSource(DataSource source) {
 		try {
-			if (source == null) throw new IllegalArgumentException("DataSource must not be null");
+			if (source == null) { throw new IllegalArgumentException("DataSource must not be null"); }
 			return source;
 		} catch (Exception e) {
 			System.err.println("setInputSource error: " + e.getMessage());
@@ -69,7 +69,7 @@ public class UserComputeImpl implements UserComputeAPI {
 	@Override
 	public DataDestination setOutputDestination(DataDestination destination) {
 		try {
-			if (destination == null) throw new IllegalArgumentException("DataDestination must not be null");
+			if (destination == null) { throw new IllegalArgumentException("DataDestination must not be null"); }
 			return destination;
 		} catch (Exception e) {
 			System.err.println("setOutputDestination error: " + e.getMessage());
@@ -80,7 +80,7 @@ public class UserComputeImpl implements UserComputeAPI {
 	@Override
 	public String setDelimiters(String delimiter) {
 		try {
-			if (delimiter == null || delimiter.isEmpty()) throw new IllegalArgumentException("Delimiter must not be null or empty");
+			if (delimiter == null || delimiter.isEmpty()) { throw new IllegalArgumentException("Delimiter must not be null or empty"); }
 			return delimiter;
 		} catch (Exception e) {
 			System.err.println("setDelimiters error: " + e.getMessage());
@@ -91,7 +91,7 @@ public class UserComputeImpl implements UserComputeAPI {
 	@Override
 	public DataSource executeJob(DataSource source) {
 		try {
-			if (source == null) throw new IllegalArgumentException("DataSource must not be null");
+			if (source == null) { throw new IllegalArgumentException("DataSource must not be null"); }
 			// TODO Auto-generated method stub
 			return null;
 		} catch (Exception e) {

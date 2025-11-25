@@ -13,8 +13,9 @@ public class ComputationImpl implements ComputationAPI {
                 throw new IllegalArgumentException("Input data must not be null");
             }
             return inputData;
+        } catch (IllegalArgumentException e) {
+            throw e;
         } catch (Exception e) {
-            // Log the error (could use a logger, here just print)
             System.err.println("processJob error: " + e.getMessage());
             return java.util.Collections.emptyList();
         }
@@ -53,8 +54,9 @@ public class ComputationImpl implements ComputationAPI {
                     return decoded.toString();
                 }
             };
+        } catch (IllegalArgumentException e) {
+            throw e;
         } catch (Exception e) {
-            // Log the error (could use a logger, here just print)
             System.err.println("compute error: " + e.getMessage());
             return new ComputeResult() {
                 @Override
