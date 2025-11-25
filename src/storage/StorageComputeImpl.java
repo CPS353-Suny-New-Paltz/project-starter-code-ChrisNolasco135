@@ -37,7 +37,11 @@ public class StorageComputeImpl implements StorageComputeAPI {
             String line;
             while ((line = reader.readLine()) != null) {
                 for (String part : line.split("[ ,;\t]+")) {
-                   result.add(Integer.parseInt(part.trim()));
+                   try {
+                   		result.add(Integer.parseInt(part.trim()));
+                   }catch (NumberFormatException e) {
+                   		// Skip invalid integer
+                   }
                 }
             }
         }catch (IOException | NullPointerException e) {
