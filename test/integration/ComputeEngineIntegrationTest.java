@@ -57,4 +57,51 @@ class ComputeEngineIntegrationTest {
         List<String> results = output.getOutputData();
         assertTrue(results.isEmpty(), "Output should be empty for empty input");
     }
+
+    @Test
+    void testExceptionHandlingWithNullDataSource() {
+        // Output destination is valid, but input source is null
+        InMemoryDataDestination output = new InMemoryDataDestination();
+        ComputationImpl computation = new ComputationImpl();
+        InMemoryStorageComputeAPI storage = new InMemoryStorageComputeAPI(null, output);
+        UserComputeImpl userCompute = new UserComputeImpl(storage, computation);
+        boolean success = false;
+        try {
+            success = userCompute.submitJob(null, output, ",");
+        } catch (Exception e) {
+            // If exception is thrown, the test should fail
+            assertFalse(true, "Exception should not propagate to process boundary: " + e.getMessage());
+        }
+        assertFalse(success, "submitJob should return false and handle exception internally for null DataSource");
+        List<String> results = output.getOutputData();
+        assertTrue(results.isEmpty(), "Output should be empty when exception is handled");
+    }
+
+    @Test
+    void testExceptionInComputationIsCaughtAndTransformed() {
+        // Stub ComputationAPI that throws exception
+        compute.ComputationAPI throwingComputation = new compute.ComputationAPI() {
+            @Override
+            public java.util.List<Integer> processJob(java.util.List<Integer> inputData) {
+                throw new RuntimeException("Simulated computation failure");
+            }
+            @Override
+            public compute.ComputeResult compute(compute.ComputeRequest request) {
+                throw new RuntimeException("Simulated computation failure");
+            }
+        };
+        InMemoryDataSource input = new InMemoryDataSource(List.of(1, 2, 3));
+        InMemoryDataDestination output = new InMemoryDataDestination();
+        InMemoryStorageComputeAPI storage = new InMemoryStorageComputeAPI(input, output);
+        UserComputeImpl userCompute = new UserComputeImpl(storage, throwingComputation);
+        boolean success = true;
+        try {
+            success = userCompute.submitJob(input, output, ",");
+        } catch (Exception e) {
+            assertFalse(true, "Exception should not propagate to process boundary: " + e.getMessage());
+        }
+        assertFalse(success, "submitJob should return false and handle computation exception internally");
+        List<String> results = output.getOutputData();
+        assertTrue(results.isEmpty(), "Output should be empty when computation exception is handled");
+    }
 }
