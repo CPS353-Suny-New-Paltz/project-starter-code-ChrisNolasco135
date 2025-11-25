@@ -27,8 +27,8 @@ class ComputeEngineIntegrationTest {
         InMemoryStorageComputeAPI storage = new InMemoryStorageComputeAPI(input, output);
         UserComputeImpl userCompute = new UserComputeImpl(storage, computation);
 
-        // Run the job (no delimiter specified, so should use defaults)
-        boolean success = userCompute.submitJob(input, output, null);
+        // Run the job (pass a valid delimiter)
+        boolean success = userCompute.submitJob(input, output, ",");
 
         // Validate (will FAIL until you implement the compute engine)
         assertTrue(success, "Job should succeed (currently stubbed to false)");
