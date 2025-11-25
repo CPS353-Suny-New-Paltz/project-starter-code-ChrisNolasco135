@@ -1,26 +1,24 @@
 package storage;
 
 import project.annotations.ProcessAPIPrototype;
+import user.DataSource;
+
 import java.util.List;
 
 public class StorageComputePrototype {
 	@ProcessAPIPrototype
 	public void prototype(StorageComputeAPI storageComputeAPI) {
 		// Example DataBatch implementation
-		DataBatch batch = new DataBatch() {
+		DataSource source = new DataSource() {
 			@Override
-			public int[] getData() {
-				return new int[] {1, 2, 3, 4, 5}; // sample data
-			}
-			@Override
-			public boolean isEmpty() {
-				return false;
+			public String getIdentifier() {
+				return "filePath.txt";
 			}
 		};
 
 		// Read data from storage
-		List<Integer> readResult = storageComputeAPI.readData(batch);
-		System.out.println("Read data from DataBatch:");
+		List<Integer> readResult = storageComputeAPI.readData(source);
+		System.out.println("Read data from DataSource:");
 		for (int value : readResult) {
 			System.out.println(value);
 		}
@@ -31,7 +29,7 @@ public class StorageComputePrototype {
 		System.out.println("Write data result: " + writeSuccess);
 	}
 	
-	public java.util.List<Integer> readData(DataBatch data) {
+	public java.util.List<Integer> readData(DataSource data) {
 		return readData(data);
 	}
 	

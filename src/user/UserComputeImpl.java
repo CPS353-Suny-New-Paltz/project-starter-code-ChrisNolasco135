@@ -1,21 +1,39 @@
 package user;
 
 import java.util.Collections;
-
 import java.util.List;
 
 public class UserComputeImpl implements UserComputeAPI {
     // Dependencies (talking to storage)
     private storage.StorageComputeAPI storageAPI;
+    private compute.ComputationAPI computeAPI;
 
-    public UserComputeImpl(storage.StorageComputeAPI storageAPI) {
+    public UserComputeImpl(storage.StorageComputeAPI storageAPI, compute.ComputationAPI computeAPI) {
         this.storageAPI = storageAPI;
+        this.computeAPI = computeAPI;
     }
 
     @Override
     public boolean submitJob(DataSource source, DataDestination destination, String delimiter) {
-        // Stub: return failure for now
-        return false;
+        setInputSource(source);
+        setOutputDestination(destination);
+        setDelimiters(delimiter);
+        // Set fields in storageAPI
+        if (storageAPI instanceof storage.StorageComputeImpl) {
+            ((storage.StorageComputeImpl) storageAPI).setSource(source);
+            ((storage.StorageComputeImpl) storageAPI).setDestination(destination);
+            ((storage.StorageComputeImpl) storageAPI).setDelimiter(delimiter);
+        }
+        List<Integer> inputData = storageAPI.readData(source);
+        if (inputData == null || inputData.isEmpty()) {
+            return false;
+        }
+        List<Integer> results = computeAPI.processJob(inputData);
+        if (results == null) {
+            return false;
+        }
+        boolean writeSuccess = storageAPI.writeData(results);
+        return writeSuccess;
     }
 
     @Override
