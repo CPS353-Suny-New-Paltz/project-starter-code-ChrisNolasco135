@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class TestComputationAPI {
     @Test
@@ -77,5 +78,18 @@ class TestComputationAPI {
         ComputeRequest req = () -> 0;
         ComputeResult res = impl.compute(req);
         assertEquals("U", res.getOutputData(), "compute should decode padded zero as 'U'");
+    }
+    
+    //Checks for exception handling
+    @Test
+    void testProcessJobThrowsOnNullInput() {
+        ComputationImpl impl = new ComputationImpl();
+        assertThrows(IllegalArgumentException.class, () -> impl.processJob(null), "processJob should throw IllegalArgumentException for null input");
+    }
+
+    @Test
+    void testComputeThrowsOnNullRequest() {
+        ComputationImpl impl = new ComputationImpl();
+        assertThrows(IllegalArgumentException.class, () -> impl.compute(null), "compute should throw IllegalArgumentException for null request");
     }
 }
