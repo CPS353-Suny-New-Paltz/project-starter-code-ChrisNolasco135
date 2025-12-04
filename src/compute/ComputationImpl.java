@@ -11,27 +11,6 @@ public class ComputationImpl implements ComputationAPI {
         return inputData;
     }
 
-	@Override
-	public ComputeResult compute(ComputeRequest request) {
-		int input = request.getInputData();
-        String numeric = String.valueOf(input);
-
-        // If the length is odd, pad a leading zero
-        if (numeric.length() % 2 != 0) {
-            numeric = "0" + numeric;
-        try {
-            if (inputData == null) {
-                throw new IllegalArgumentException("Input data must not be null");
-            }
-            return inputData;
-        } catch (IllegalArgumentException e) {
-            throw e;
-        } catch (Exception e) {
-            System.err.println("processJob error: " + e.getMessage());
-            return java.util.Collections.emptyList();
-        }
-    }
-
     @Override
     public ComputeResult compute(ComputeRequest request) {
         try {

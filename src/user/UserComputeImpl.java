@@ -27,44 +27,15 @@ public class UserComputeImpl implements UserComputeAPI {
         }
         List<Integer> results = computeAPI.processJob(inputData);
         if (results == null) {
-        try {
-            if (source == null){
-                throw new IllegalArgumentException("DataSource must not be null");
-            }
-            if (destination == null){
-                throw new IllegalArgumentException("DataDestination must not be null");
-            }
-            if (delimiter == null || delimiter.isEmpty()) {
-                throw new IllegalArgumentException("Delimiter must not be null or empty");
-            }
-            setInputSource(source);
-            setOutputDestination(destination);
-            setDelimiters(delimiter);
-            // Set fields in storageAPI
-            if (storageAPI instanceof storage.StorageComputeImpl){
-                ((storage.StorageComputeImpl) storageAPI).setSource(source);
-                ((storage.StorageComputeImpl) storageAPI).setDestination(destination);
-                ((storage.StorageComputeImpl) storageAPI).setDelimiter(delimiter);
-            }
-            List<Integer> inputData = storageAPI.readData(source);
-            if (inputData == null || inputData.isEmpty()){
-                return false;
-            }
-            List<Integer> results = computeAPI.processJob(inputData);
-            if (results == null){
-                return false;
-            }
-            boolean writeSuccess = storageAPI.writeData(results);
-            return writeSuccess;
-        } catch (Exception e) {
-            System.err.println("submitJob error: " + e.getMessage());
             return false;
         }
+        boolean writeSuccess = storageAPI.writeData(results);
+        return writeSuccess;
     }
 
     @Override
     public List<String> getResults() {
-        try {
+    	try {
             // Stub: return empty list
             return Collections.emptyList();
         } catch (Exception e) {
@@ -73,9 +44,9 @@ public class UserComputeImpl implements UserComputeAPI {
         }
     }
 
-	@Override
-	public DataSource setInputSource(DataSource source) {
-		try {
+    @Override
+    public DataSource setInputSource(DataSource source) {
+    	try {
 			if (source == null){
 				throw new IllegalArgumentException("DataSource must not be null");
 			}
@@ -86,9 +57,9 @@ public class UserComputeImpl implements UserComputeAPI {
 		}
 	}
 
-	@Override
-	public DataDestination setOutputDestination(DataDestination destination) {
-		try {
+    @Override
+    public DataDestination setOutputDestination(DataDestination destination) {
+    	try {
 			if (destination == null){
 				throw new IllegalArgumentException("DataDestination must not be null");
 			}
@@ -99,9 +70,9 @@ public class UserComputeImpl implements UserComputeAPI {
 		}
 	}
 
-	@Override
-	public String setDelimiters(String delimiter) {
-		try {
+    @Override
+    public String setDelimiters(String delimiter) {
+    	try {
 			if (delimiter == null || delimiter.isEmpty()){
 				throw new IllegalArgumentException("Delimiter must not be null or empty");
 			}
@@ -112,9 +83,9 @@ public class UserComputeImpl implements UserComputeAPI {
 		}
 	}
 
-	@Override
-	public DataSource executeJob(DataSource source) {
-		try {
+    @Override
+    public DataSource executeJob(DataSource source) {
+    	try {
 			if (source == null){
 				throw new IllegalArgumentException("DataSource must not be null");
 			}
