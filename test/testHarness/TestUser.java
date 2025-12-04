@@ -1,8 +1,7 @@
-package testHarness;
+package testharness;
 
 import java.io.File;
 import user.UserComputeAPI;
-
 
 public class TestUser {
 	

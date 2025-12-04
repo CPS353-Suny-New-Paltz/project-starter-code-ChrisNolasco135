@@ -1,6 +1,7 @@
-package testHarness;
+package testharness;
 
 import user.MultiThreadedUserComputeImpl;
+
 import user.UserComputeAPI;
 import user.UserComputeImpl;
 
