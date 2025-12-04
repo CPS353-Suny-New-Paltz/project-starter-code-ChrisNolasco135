@@ -15,22 +15,27 @@ public class UserComputeImpl implements UserComputeAPI {
 
     @Override
     public boolean submitJob(DataSource source, DataDestination destination, String delimiter) {
-        setInputSource(source);
-        setOutputDestination(destination);
-        setDelimiters(delimiter);
-        storageAPI.setSource(source);
-        storageAPI.setDestination(destination);
-        storageAPI.setDelimiter(delimiter);
-        List<Integer> inputData = storageAPI.readData(source);
-        if (inputData == null || inputData.isEmpty()) {
+        try {
+            setInputSource(source);
+            setOutputDestination(destination);
+            setDelimiters(delimiter);
+            storageAPI.setSource(source);
+            storageAPI.setDestination(destination);
+            storageAPI.setDelimiter(delimiter);
+            List<Integer> inputData = storageAPI.readData(source);
+            if (inputData == null || inputData.isEmpty()) {
+                return false;
+            }
+            List<Integer> results = computeAPI.processJob(inputData);
+            if (results == null) {
+                return false;
+            }
+            // Only write if computation succeeded
+            return storageAPI.writeData(results);
+        } catch (Exception e) {
+            // Do not write anything to output if an exception occurs
             return false;
         }
-        List<Integer> results = computeAPI.processJob(inputData);
-        if (results == null) {
-            return false;
-        }
-        boolean writeSuccess = storageAPI.writeData(results);
-        return writeSuccess;
     }
 
     @Override
