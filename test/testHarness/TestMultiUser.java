@@ -38,7 +38,7 @@ public class TestMultiUser {
 		// Store it in the 'coordinator' instance variable
 		coordinator = networkAPI;
 	}
-	@afterEach
+	@AfterEach
 	public void cleanup() {
         if (networkAPI != null) {
             networkAPI.shutdown();
