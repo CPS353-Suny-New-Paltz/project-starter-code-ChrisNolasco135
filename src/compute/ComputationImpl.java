@@ -8,17 +8,10 @@ public class ComputationImpl implements ComputationAPI {
 
     @Override
     public List<Integer> processJob(List<Integer> inputData) {
-        try {
-            if (inputData == null) {
-                throw new IllegalArgumentException("Input data must not be null");
-            }
-            return inputData;
-        } catch (IllegalArgumentException e) {
-            throw e;
-        } catch (Exception e) {
-            System.err.println("processJob error: " + e.getMessage());
-            return java.util.Collections.emptyList();
+        if (inputData == null) {
+            throw new IllegalArgumentException("Input data must not be null");
         }
+        return inputData;
     }
 
     @Override

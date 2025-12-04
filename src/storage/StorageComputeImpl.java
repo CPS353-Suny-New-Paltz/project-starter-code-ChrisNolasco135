@@ -7,6 +7,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+
+import compute.ComputationAPI;
 import user.DataSource;
 import user.DataDestination;
 
@@ -14,16 +16,14 @@ public class StorageComputeImpl implements StorageComputeAPI {
     private DataSource source;
     private DataDestination destination;
     private String delimiter = ",";
+	private ComputationAPI computationAPI;
 
     public StorageComputeImpl(compute.ComputationAPI computationAPI) {
-        // Optionally store computationAPI if needed
+        this.computationAPI = computationAPI;
     }
 
     private String getFilePath(DataSource data) {
-        if (data instanceof user.DataSource) {
-            return ((user.DataSource) data).getIdentifier();
-        }
-        return null;
+        return data != null ? data.getIdentifier() : null;
     }
 
     @Override
@@ -85,23 +85,25 @@ public class StorageComputeImpl implements StorageComputeAPI {
         }
     }
 
-    // Optionally add methods to set source/destination
-    public void setSource(DataSource source) {
-        if (source == null) {
-            throw new IllegalArgumentException("Source must not be null");
-        }
-        this.source = source;
-    }
+    @Override
     public void setDestination(DataDestination destination) {
         if (destination == null) {
             throw new IllegalArgumentException("Destination must not be null");
         }
         this.destination = destination;
     }
+
+    @Override
     public void setDelimiter(String delimiter) {
         if (delimiter == null || delimiter.isEmpty()) {
             throw new IllegalArgumentException("Delimiter must not be null or empty");
         }
         this.delimiter = delimiter;
     }
+
+	@Override
+	public void setSource(DataSource source) {
+		// TODO Auto-generated method stub
+		
+	}
 }
