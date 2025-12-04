@@ -8,7 +8,6 @@ public class ComputationImpl implements ComputationAPI {
 
     @Override
     public List<Integer> processJob(List<Integer> inputData) {
-        // For testing, just return the input data unchanged
         return inputData;
     }
 

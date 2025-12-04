@@ -7,6 +7,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+
+import compute.ComputationAPI;
 import user.DataSource;
 import user.DataDestination;
 
@@ -14,16 +16,14 @@ public class StorageComputeImpl implements StorageComputeAPI {
     private DataSource source;
     private DataDestination destination;
     private String delimiter = ",";
+	private ComputationAPI computationAPI;
 
     public StorageComputeImpl(compute.ComputationAPI computationAPI) {
-        // Optionally store computationAPI if needed
+        this.computationAPI = computationAPI;
     }
 
     private String getFilePath(DataSource data) {
-        if (data instanceof user.DataSource) {
-            return ((user.DataSource) data).getIdentifier();
-        }
-        return null;
+        return data != null ? data.getIdentifier() : null;
     }
 
     @Override
@@ -70,13 +70,17 @@ public class StorageComputeImpl implements StorageComputeAPI {
         return true;
     }
 
-    // Optionally add methods to set source/destination
-    public void setSource(DataSource source) {
+    @Override
+    public void setSource(user.DataSource source) {
         this.source = source;
     }
-    public void setDestination(DataDestination destination) {
+
+    @Override
+    public void setDestination(user.DataDestination destination) {
         this.destination = destination;
     }
+
+    @Override
     public void setDelimiter(String delimiter) {
         this.delimiter = delimiter;
     }

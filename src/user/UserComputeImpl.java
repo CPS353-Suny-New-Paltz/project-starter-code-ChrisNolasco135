@@ -18,12 +18,9 @@ public class UserComputeImpl implements UserComputeAPI {
         setInputSource(source);
         setOutputDestination(destination);
         setDelimiters(delimiter);
-        // Set fields in storageAPI
-        if (storageAPI instanceof storage.StorageComputeImpl) {
-            ((storage.StorageComputeImpl) storageAPI).setSource(source);
-            ((storage.StorageComputeImpl) storageAPI).setDestination(destination);
-            ((storage.StorageComputeImpl) storageAPI).setDelimiter(delimiter);
-        }
+        storageAPI.setSource(source);
+        storageAPI.setDestination(destination);
+        storageAPI.setDelimiter(delimiter);
         List<Integer> inputData = storageAPI.readData(source);
         if (inputData == null || inputData.isEmpty()) {
             return false;
@@ -45,26 +42,20 @@ public class UserComputeImpl implements UserComputeAPI {
 	@Override
 	public DataSource setInputSource(DataSource source) {
 		return source;
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public DataDestination setOutputDestination(DataDestination destination) {
 		return destination;
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public String setDelimiters(String delimiter) {
 		return delimiter;
-		
 	}
 
 	@Override
 	public DataSource executeJob(DataSource source) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }
