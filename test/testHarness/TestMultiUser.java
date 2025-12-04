@@ -2,6 +2,7 @@ package testharness;
 
 import user.MultiThreadedUserComputeImpl;
 
+
 import user.UserComputeAPI;
 import user.UserComputeImpl;
 
@@ -17,6 +18,7 @@ import java.util.concurrent.Future;
 //changed org.junit.Assert to org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 public class TestMultiUser {
@@ -36,6 +38,7 @@ public class TestMultiUser {
 		// Store it in the 'coordinator' instance variable
 		coordinator = networkAPI;
 	}
+	@afterEach
 	public void cleanup() {
         if (networkAPI != null) {
             networkAPI.shutdown();
