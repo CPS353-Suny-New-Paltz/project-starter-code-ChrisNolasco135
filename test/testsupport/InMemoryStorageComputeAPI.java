@@ -2,6 +2,7 @@ package testsupport;
 
 
 import storage.StorageComputeAPI;
+import user.DataDestination;
 import user.DataSource;
 
 import java.util.List;
@@ -29,4 +30,22 @@ public class InMemoryStorageComputeAPI implements StorageComputeAPI {
         }
         return true; // Always succeed in test mode
     }
+
+	@Override
+	public void setSource(DataSource source) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setDestination(DataDestination destination) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setDelimiter(String delimiter) {
+		// TODO Auto-generated method stub
+		
+	}
 }
