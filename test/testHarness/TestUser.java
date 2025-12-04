@@ -1,13 +1,16 @@
 package testharness;
 
 import java.io.File;
+
+import user.DataSource;
+import user.DataDestination;
 import user.UserComputeAPI;
 
 public class TestUser {
 	
 	// TODO 3: change the type of this variable to the name you're using for your
 	// @NetworkAPI interface; also update the parameter passed to the constructor
-	private final user.UserComputeAPI coordinator;
+	private final UserComputeAPI coordinator;
 
 	public TestUser(user.UserComputeAPI coordinator) {
 		this.coordinator = coordinator;
@@ -18,8 +21,8 @@ public class TestUser {
 		String inputPath = "test" + File.separatorChar + "testInputFile.test";
 		// TODO 4: Call the appropriate method(s) on the coordinator to get it to 
 		// run the compute job specified by inputPath, outputPath, and delimiter
-		user.DataSource inputSource = () -> inputPath;
-		user.DataDestination outputDestination = () -> outputPath;
+		DataSource inputSource = () -> inputPath;
+		DataDestination outputDestination = () -> outputPath;
 		coordinator.submitJob(inputSource, outputDestination, String.valueOf(delimiter));
 	}
 

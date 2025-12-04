@@ -48,6 +48,8 @@ public class TestMultiUser {
 		for (int i = 0; i < numThreads; i++) {
 			testUsers.add(new TestUser(coordinator));
 		}
+		// Prints statement to verify that the test users were created successfully
+		System.out.println("Created " +numThreads +" test users");
 		
 		// Run single threaded
 		String singleThreadFilePrefix = "testMultiUser.compareMultiAndSingleThreaded.test.singleThreadOut.tmp";
@@ -83,6 +85,9 @@ public class TestMultiUser {
 		// Check that the output is the same for multi-threaded and single-threaded
 		List<String> singleThreaded = loadAllOutput(singleThreadFilePrefix, numThreads);
 		List<String> multiThreaded = loadAllOutput(multiThreadFilePrefix, numThreads);
+		// Displays the results to verify that they are correct
+		System.out.println("Single threaded results: "+ singleThreaded);
+		System.out.println("Multi threaded results: "+multiThreaded);
 		Assertions.assertEquals(singleThreaded, multiThreaded);
 		//changed Assert.assertEquals to Assertions.assertEquals
 	}
