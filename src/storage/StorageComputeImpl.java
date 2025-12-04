@@ -86,19 +86,6 @@ public class StorageComputeImpl implements StorageComputeAPI {
     }
 
     @Override
-    public void setSource(user.DataSource source) {
-        this.source = source;
-    }
-
-    @Override
-    public void setDestination(user.DataDestination destination) {
-    // Optionally add methods to set source/destination
-    public void setSource(DataSource source) {
-        if (source == null) {
-            throw new IllegalArgumentException("Source must not be null");
-        }
-        this.source = source;
-    }
     public void setDestination(DataDestination destination) {
         if (destination == null) {
             throw new IllegalArgumentException("Destination must not be null");
@@ -113,4 +100,10 @@ public class StorageComputeImpl implements StorageComputeAPI {
         }
         this.delimiter = delimiter;
     }
+
+	@Override
+	public void setSource(DataSource source) {
+		// TODO Auto-generated method stub
+		
+	}
 }
