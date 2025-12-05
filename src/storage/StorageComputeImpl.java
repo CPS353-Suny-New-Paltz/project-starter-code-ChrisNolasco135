@@ -20,10 +20,7 @@ public class StorageComputeImpl implements StorageComputeAPI {
     }
 
     private String getFilePath(DataSource data) {
-        if (data instanceof user.DataSource) {
-            return ((user.DataSource) data).getIdentifier();
-        }
-        return null;
+            return data != null ? data.getIdentifier() : null;
     }
 
     @Override

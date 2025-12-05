@@ -28,12 +28,10 @@ public class UserComputeImpl implements UserComputeAPI {
             setInputSource(source);
             setOutputDestination(destination);
             setDelimiters(delimiter);
-            // Set fields in storageAPI
-            if (storageAPI instanceof storage.StorageComputeImpl){
-                ((storage.StorageComputeImpl) storageAPI).setSource(source);
-                ((storage.StorageComputeImpl) storageAPI).setDestination(destination);
-                ((storage.StorageComputeImpl) storageAPI).setDelimiter(delimiter);
-            }
+            // Set fields in storageAPI directly (no instanceof needed)
+            storageAPI.setSource(source);
+            storageAPI.setDestination(destination);
+            storageAPI.setDelimiter(delimiter);
             List<Integer> inputData = storageAPI.readData(source);
             if (inputData == null || inputData.isEmpty()){
                 return false;
@@ -106,8 +104,24 @@ public class UserComputeImpl implements UserComputeAPI {
 			if (source == null){
 				throw new IllegalArgumentException("DataSource must not be null");
 			}
-			// TODO Auto-generated method stub
-			return null;
+			// Read input data from the source
+			List<Integer> inputData = storageAPI.readData(source);
+			if (inputData == null || inputData.isEmpty()) {
+				return null;
+			}
+			// For each input, create a ComputeRequest and call computeAPI.compute
+			for (Integer value : inputData) {
+				compute.ComputeRequest request = new compute.ComputeRequest() {
+					@Override
+					public int getInputData() {
+						return value;
+					}
+				};
+				compute.ComputeResult result = computeAPI.compute(request);
+				// Optionally, process result.getOutputData() here
+			}
+			// Return the source as per method signature (could be changed if needed)
+			return source;
 		} catch (Exception e) {
 			System.err.println("executeJob error: " + e.getMessage());
 			return null;
