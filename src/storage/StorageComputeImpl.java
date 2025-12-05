@@ -9,22 +9,23 @@ import java.util.ArrayList;
 import java.util.List;
 import user.DataSource;
 import user.DataDestination;
+import compute.ComputationAPI;
 
 public class StorageComputeImpl implements StorageComputeAPI {
     private DataSource source;
     private DataDestination destination;
     private String delimiter = ",";
-    private compute.ComputationAPI ComputationAPI;
+    private ComputationAPI computationAPI;
 
     public StorageComputeImpl(compute.ComputationAPI computationAPI) {
-        this.ComputationAPI = computationAPI;
+        this.computationAPI = computationAPI;
     }
 
     private String getFilePath(DataSource data) {
-        if (data instanceof user.DataSource) {
-            return ((user.DataSource) data).getIdentifier();
+        if (data == null) {
+            return null;
         }
-        return null;
+        return data.getIdentifier();
     }
 
     @Override
