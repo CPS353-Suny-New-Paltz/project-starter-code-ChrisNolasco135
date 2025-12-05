@@ -14,9 +14,10 @@ public class StorageComputeImpl implements StorageComputeAPI {
     private DataSource source;
     private DataDestination destination;
     private String delimiter = ",";
+    private compute.ComputationAPI ComputationAPI;
 
     public StorageComputeImpl(compute.ComputationAPI computationAPI) {
-        // Optionally store computationAPI if needed
+        this.ComputationAPI = computationAPI;
     }
 
     private String getFilePath(DataSource data) {

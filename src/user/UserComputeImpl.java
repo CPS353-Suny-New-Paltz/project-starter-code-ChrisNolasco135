@@ -28,12 +28,6 @@ public class UserComputeImpl implements UserComputeAPI {
             setInputSource(source);
             setOutputDestination(destination);
             setDelimiters(delimiter);
-            // Set fields in storageAPI
-            if (storageAPI instanceof storage.StorageComputeImpl){
-                ((storage.StorageComputeImpl) storageAPI).setSource(source);
-                ((storage.StorageComputeImpl) storageAPI).setDestination(destination);
-                ((storage.StorageComputeImpl) storageAPI).setDelimiter(delimiter);
-            }
             List<Integer> inputData = storageAPI.readData(source);
             if (inputData == null || inputData.isEmpty()){
                 return false;
