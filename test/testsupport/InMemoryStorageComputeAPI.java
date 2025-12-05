@@ -29,4 +29,19 @@ public class InMemoryStorageComputeAPI implements StorageComputeAPI {
         }
         return true; // Always succeed in test mode
     }
+
+    @Override
+    public void setSource(user.DataSource source) {
+        
+    }
+
+    @Override
+    public void setDestination(user.DataDestination destination) {
+        
+    }
+
+    @Override
+    public void setDelimiter(String delimiter) {
+        
+    }
 }

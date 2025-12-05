@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class UserComputeImpl implements UserComputeAPI {
-    // Dependencies (talking to storage)
     private storage.StorageComputeAPI storageAPI;
     private compute.ComputationAPI computeAPI;
 
