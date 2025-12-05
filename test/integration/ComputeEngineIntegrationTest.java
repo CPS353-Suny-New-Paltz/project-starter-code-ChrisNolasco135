@@ -14,10 +14,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-public class ComputeEngineIntegrationTest {
+class ComputeEngineIntegrationTest {
 
     @Test
-    public void testEndToEndWithInMemoryDataStore() {
+    void testEndToEndWithInMemoryDataStore() {
         // Input: integers [1, 10, 25]
         InMemoryDataSource input = new InMemoryDataSource(List.of(1, 10, 25));
         InMemoryDataDestination output = new InMemoryDataDestination();
@@ -41,7 +41,7 @@ public class ComputeEngineIntegrationTest {
     }
 
     @Test
-    public void testEndToEndWithEmptyInput() {
+    void testEndToEndWithEmptyInput() {
         // Input: empty list
     	// Additional test to verify behavior with empty input
         InMemoryDataSource input = new InMemoryDataSource(List.of());
@@ -59,7 +59,7 @@ public class ComputeEngineIntegrationTest {
     }
 
     @Test
-    public void testExceptionHandlingWithNullDataSource() {
+    void testExceptionHandlingWithNullDataSource() {
         // Output destination is valid, but input source is null
         InMemoryDataDestination output = new InMemoryDataDestination();
         ComputationImpl computation = new ComputationImpl();
@@ -78,7 +78,7 @@ public class ComputeEngineIntegrationTest {
     }
 
     @Test
-    public void testExceptionInComputationIsCaughtAndTransformed() {
+    void testExceptionInComputationIsCaughtAndTransformed() {
         // Stub ComputationAPI that throws exception
         compute.ComputationAPI throwingComputation = new compute.ComputationAPI() {
             @Override
