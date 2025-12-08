@@ -1,16 +1,15 @@
 package user;
 
-import java.util.Collections;
-import java.util.List;
-
 public class UserComputeImpl implements UserComputeAPI {
     // Dependencies (talking to storage)
     private storage.StorageComputeAPI storageAPI;
     private compute.ComputationAPI computeAPI;
-
+    private String delimiter = ",";
+    
     public UserComputeImpl(storage.StorageComputeAPI storageAPI, compute.ComputationAPI computeAPI) {
         this.storageAPI = storageAPI;
         this.computeAPI = computeAPI;
+        
     }
 
     @Override
@@ -25,106 +24,27 @@ public class UserComputeImpl implements UserComputeAPI {
             if (delimiter == null || delimiter.isEmpty()) {
                 throw new IllegalArgumentException("Delimiter must not be null or empty");
             }
-            setInputSource(source);
-            setOutputDestination(destination);
-            setDelimiters(delimiter);
-            // Set fields in storageAPI directly (no instanceof needed)
-            storageAPI.setSource(source);
-            storageAPI.setDestination(destination);
-            storageAPI.setDelimiter(delimiter);
-            List<Integer> inputData = storageAPI.readData(source);
-            if (inputData == null || inputData.isEmpty()){
-                return false;
-            }
-            List<Integer> results = computeAPI.processJob(inputData);
+            setDelimiter(delimiter);
+            long inputData = storageAPI.readData(source);
+            String results = computeAPI.compute(inputData);
             if (results == null){
                 return false;
             }
-            boolean writeSuccess = storageAPI.writeData(results);
+            // Write results using the delimiter so output can be split correctly
+            String output = String.join(delimiter, results.split(""));
+            boolean writeSuccess = storageAPI.writeData(destination, output);
             return writeSuccess;
         } catch (Exception e) {
             System.err.println("submitJob error: " + e.getMessage());
             return false;
         }
     }
-
-    @Override
-    public List<String> getResults() {
-        try {
-            // Stub: return empty list
-            return Collections.emptyList();
-        } catch (Exception e) {
-            System.err.println("getResults error: " + e.getMessage());
-            return Collections.emptyList();
-        }
-    }
-
-	@Override
-	public DataSource setInputSource(DataSource source) {
-		try {
-			if (source == null){
-				throw new IllegalArgumentException("DataSource must not be null");
-			}
-			return source;
-		} catch (Exception e) {
-			System.err.println("setInputSource error: " + e.getMessage());
-			return null;
+    
+	public String setDelimiter(String delimiter) {
+		if (delimiter == null || delimiter.trim().isEmpty()) {
+			throw new IllegalArgumentException("Delimiter must not be null or empty");
 		}
-	}
-
-	@Override
-	public DataDestination setOutputDestination(DataDestination destination) {
-		try {
-			if (destination == null){
-				throw new IllegalArgumentException("DataDestination must not be null");
-			}
-			return destination;
-		} catch (Exception e) {
-			System.err.println("setOutputDestination error: " + e.getMessage());
-			return null;
-		}
-	}
-
-	@Override
-	public String setDelimiters(String delimiter) {
-		try {
-			if (delimiter == null || delimiter.isEmpty()){
-				throw new IllegalArgumentException("Delimiter must not be null or empty");
-			}
-			return delimiter;
-		} catch (Exception e) {
-			System.err.println("setDelimiters error: " + e.getMessage());
-			return ",";
-		}
-	}
-
-	@Override
-	public DataSource executeJob(DataSource source) {
-		try {
-			if (source == null){
-				throw new IllegalArgumentException("DataSource must not be null");
-			}
-			// Read input data from the source
-			List<Integer> inputData = storageAPI.readData(source);
-			if (inputData == null || inputData.isEmpty()) {
-				return null;
-			}
-			// For each input, create a ComputeRequest and call computeAPI.compute
-			for (Integer value : inputData) {
-				compute.ComputeRequest request = new compute.ComputeRequest() {
-					@Override
-					public int getInputData() {
-						return value;
-					}
-				};
-				compute.ComputeResult result = computeAPI.compute(request);
-				// Optionally, process result.getOutputData() here
-			}
-			// Return the source as per method signature (could be changed if needed)
-			return source;
-		} catch (Exception e) {
-			System.err.println("executeJob error: " + e.getMessage());
-			return null;
-		}
+		this.delimiter = delimiter;
+		return this.delimiter;
 	}
 }

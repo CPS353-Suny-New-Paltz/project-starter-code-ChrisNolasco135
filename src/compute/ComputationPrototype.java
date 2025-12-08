@@ -7,27 +7,13 @@ public class ComputationPrototype {
 	@ConceptualAPIPrototype
 	public void prototype(ComputationAPI computationAPI) {
 		// Example ComputeRequest implementation
-		ComputeRequest request = new ComputeRequest() {
-			@Override
-			public int getInputData() {
-				return 42; // sample input
-			}
-		};
-
-		// Call the compute method
-		ComputeResult result = computationAPI.compute(request);
+		
+		long inputData = 708172152630L; // Example input data
+		String result = computationAPI.compute(inputData);
 
 		// Process and print the output data
-		String output = result.getOutputData();
 		System.out.println("ComputeResult output:");
-		System.out.println(output);
+		System.out.println(result);
     }
 	
-	public ComputeResult compute(ComputeRequest request) {
-		return compute(request);
-	}
-	
-	public List<Integer> processJob(List<Integer> inputData) {
-		return processJob(inputData);
-	}
 }

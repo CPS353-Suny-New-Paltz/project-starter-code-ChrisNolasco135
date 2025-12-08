@@ -1,33 +1,12 @@
 package compute;
 
-import java.util.List;
-
 public class ComputationImpl implements ComputationAPI {
 	private static final int SHIFT = 7;
     private static final int MOD = 27; // 26 letters + space
 
     @Override
-    public List<Integer> processJob(List<Integer> inputData) {
+    public String compute(long input) {
         try {
-            if (inputData == null) {
-                throw new IllegalArgumentException("Input data must not be null");
-            }
-            return inputData;
-        } catch (IllegalArgumentException e) {
-            throw e;
-        } catch (Exception e) {
-            System.err.println("processJob error: " + e.getMessage());
-            return java.util.Collections.emptyList();
-        }
-    }
-
-    @Override
-    public ComputeResult compute(ComputeRequest request) {
-        try {
-            if (request == null) {
-                throw new IllegalArgumentException("ComputeRequest must not be null");
-            }
-            int input = request.getInputData();
             String numeric = String.valueOf(input);
             if (numeric == null || numeric.isEmpty()) {
                 throw new IllegalArgumentException("Input data must not be empty");
@@ -48,22 +27,12 @@ public class ComputationImpl implements ComputationAPI {
                 }
                 decoded.append(letter);
             }
-            return new ComputeResult() {
-                @Override
-                public String getOutputData() {
-                    return decoded.toString();
-                }
-            };
+                return decoded.toString();
         } catch (IllegalArgumentException e) {
             throw e;
         } catch (Exception e) {
             System.err.println("compute error: " + e.getMessage());
-            return new ComputeResult() {
-                @Override
-                public String getOutputData() {
-                    return "";
-                }
-            };
+            throw new RuntimeException("Computation failed", e);
         }
     }
 }
