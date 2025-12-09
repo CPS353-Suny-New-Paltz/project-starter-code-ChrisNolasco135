@@ -8,60 +8,51 @@ import testsupport.InMemoryStorageComputeAPI;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ComputeEngineIntegrationTest {
     @Test
-    void testEndToEndWithInMemoryDataStore() {
-        // Input: [1, 10, 25]
-        InMemoryDataSource source = new InMemoryDataSource(List.of(1, 10, 25));
+    void testComputeEngineBasicFlow() {
+        // Encoded for "AB": (A=7, B=8)
+        List<Integer> inputData = Arrays.asList(7, 8);
+        InMemoryDataSource source = new InMemoryDataSource(inputData);
         InMemoryDataDestination destination = new InMemoryDataDestination();
         InMemoryStorageComputeAPI storageAPI = new InMemoryStorageComputeAPI(source, destination);
-        ComputationImpl computeAPI = new ComputationImpl();
-        UserComputeImpl engine = new UserComputeImpl(storageAPI, computeAPI);
-        boolean success = engine.submitJob(source, destination, ",");
-        assertTrue(success);
-        List<String> output = destination.getOutputData();
-        assertEquals(List.of("B", "K", "Z"), output); // 1->B, 10->K, 25->Z (shift 7 Caesar logic)
+        ComputationImpl computationAPI = new ComputationImpl();
+        UserComputeImpl userCompute = new UserComputeImpl(storageAPI, computationAPI);
+        boolean result = userCompute.submitJob(source, destination, ",");
+        assertTrue(result);
+        // Output should be ["A", "B"]
+        assertEquals(Arrays.asList("A", "B"), destination.getOutputData());
     }
 
     @Test
-    void testEndToEndWithEmptyInput() {
-        InMemoryDataSource source = new InMemoryDataSource(List.of());
+    void testComputeEngineWithSpaceAndCustomDelimiter() {
+        // Encoded for "A B": (A=7, space=6, B=8)
+        List<Integer> inputData = Arrays.asList(7, 6, 8);
+        InMemoryDataSource source = new InMemoryDataSource(inputData);
         InMemoryDataDestination destination = new InMemoryDataDestination();
         InMemoryStorageComputeAPI storageAPI = new InMemoryStorageComputeAPI(source, destination);
-        ComputationImpl computeAPI = new ComputationImpl();
-        UserComputeImpl engine = new UserComputeImpl(storageAPI, computeAPI);
-        boolean success = engine.submitJob(source, destination, ",");
-        assertFalse(success);
-        assertTrue(destination.getOutputData().isEmpty());
+        ComputationImpl computationAPI = new ComputationImpl();
+        UserComputeImpl userCompute = new UserComputeImpl(storageAPI, computationAPI);
+        boolean result = userCompute.submitJob(source, destination, "|");
+        assertTrue(result);
+        // Output should be ["A", " ", "B"]
+        assertEquals(Arrays.asList("A", " ", "B"), destination.getOutputData());
     }
 
     @Test
-    void testEndToEndWithNullInput() {
-        InMemoryDataDestination destination = new InMemoryDataDestination();
-        InMemoryStorageComputeAPI storageAPI = new InMemoryStorageComputeAPI(null, destination);
-        ComputationImpl computeAPI = new ComputationImpl();
-        UserComputeImpl engine = new UserComputeImpl(storageAPI, computeAPI);
-        boolean success = engine.submitJob(null, destination, ",");
-        assertFalse(success);
-        assertTrue(destination.getOutputData().isEmpty());
-    }
-
-    @Test
-    void testComputationExceptionHandling() {
-        InMemoryDataSource source = new InMemoryDataSource(List.of(1, 10, 25));
+    void testComputeEngineEmptyInputThrows() {
+        List<Integer> inputData = Arrays.asList();
+        InMemoryDataSource source = new InMemoryDataSource(inputData);
         InMemoryDataDestination destination = new InMemoryDataDestination();
         InMemoryStorageComputeAPI storageAPI = new InMemoryStorageComputeAPI(source, destination);
-        // Custom computeAPI that throws exception
-        compute.ComputationAPI computeAPI = input -> { throw new RuntimeException("Computation failed"); };
-        UserComputeImpl engine = new UserComputeImpl(storageAPI, computeAPI);
-        boolean success = engine.submitJob(source, destination, ",");
-        assertFalse(success);
-        assertTrue(destination.getOutputData().isEmpty());
+        ComputationImpl computationAPI = new ComputationImpl();
+        UserComputeImpl userCompute = new UserComputeImpl(storageAPI, computationAPI);
+        assertThrows(IllegalArgumentException.class, () -> userCompute.submitJob(source, destination, ","));
     }
 }

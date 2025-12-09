@@ -1,5 +1,7 @@
 package storage;
 
+import java.util.List;
+
 import project.annotations.ProcessAPIPrototype;
 import user.DataSource;
 import user.DataDestination;
@@ -23,11 +25,11 @@ public class StorageComputePrototype {
 		};
 
 		// Read data from storage
-		long readResult = storageComputeAPI.readData(source);
+		List<Integer> readResult = storageComputeAPI.readData(source);
 		System.out.println("Read data from DataSource: " + readResult);
 
 		// Write data to storage
-		String writeData = "HelloWorld";
+		String writeData = "HELLO WORLD";
 		boolean writeSuccess = storageComputeAPI.writeData(destination, writeData);
 		System.out.println("Write data result: " + writeSuccess);
 

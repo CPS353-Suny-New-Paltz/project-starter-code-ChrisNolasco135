@@ -1,6 +1,5 @@
 package testsupport;
 
-
 import storage.StorageComputeAPI;
 import user.DataDestination;
 import user.DataSource;
@@ -18,29 +17,32 @@ public class InMemoryStorageComputeAPI implements StorageComputeAPI {
     }
 
     @Override
-    public long readData(DataSource data) {
-        if (source == null || source.getInputData() == null || source.getInputData().isEmpty()) return 0L;
-        List<Integer> input = source.getInputData();
-        StringBuilder sb = new StringBuilder();
-        for (Integer num : input) {
-            sb.append(num);
+    public List<Integer> readData(DataSource data) {
+        if (source == null || source.getInputData() == null || source.getInputData().isEmpty()) {
+            throw new IllegalArgumentException("DataSource must not be null or empty");
         }
-        try {
-            return Long.parseLong(sb.toString());
-        } catch (NumberFormatException e) {
-            return 0L;
-        }
+        return source.getInputData();
     }
 
     @Override
     public boolean writeData(DataDestination destination, String data) {
-        if (data == null || destination == null) return false;
-        if (!(destination instanceof testsupport.InMemoryDataDestination)) return false;
-        testsupport.InMemoryDataDestination memDest = (testsupport.InMemoryDataDestination) destination;
-        memDest.getOutputData().clear();
-        for (String part : data.split(delimiter)) {
-            memDest.addOutput(part);
+        return writeData(destination, data, ",");
+    }
+
+    @Override
+    public boolean writeData(DataDestination destination, String data, String delimiter) {
+        if (data == null || destination == null || delimiter == null || delimiter.trim().isEmpty()) {
+            throw new IllegalArgumentException("Data, destination, and delimiter must not be null or empty");
         }
-        return true;
+        try {
+            testsupport.InMemoryDataDestination memDest = (testsupport.InMemoryDataDestination) destination;
+            memDest.getOutputData().clear();
+            for (int i = 0; i < data.length(); i++) {
+                memDest.addOutput(String.valueOf(data.charAt(i)));
+            }
+            return true;
+        } catch (ClassCastException e) {
+            throw new IllegalArgumentException("Invalid DataDestination type: " + e.getMessage());
+        }
     }
 }

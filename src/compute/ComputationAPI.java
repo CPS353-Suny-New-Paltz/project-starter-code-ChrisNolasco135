@@ -1,9 +1,11 @@
 package compute;
 
+import java.util.List;
+
 import project.annotations.ConceptualAPI;
 
 @ConceptualAPI
 public interface ComputationAPI {
-	String compute(long input);
+	String compute(List<Integer> input);
 	
 }
