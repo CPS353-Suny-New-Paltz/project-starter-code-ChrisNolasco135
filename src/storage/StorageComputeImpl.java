@@ -13,7 +13,8 @@ import user.DataSource;
 
 public class StorageComputeImpl implements StorageComputeAPI {
 
-	// Reads integers from the file specified by DataSource, using comma as delimiter, and returns them as a List<Integer>
+	// Reads integers from the file specified by DataSource, using the provided delimiter, and returns them as a List<Integer>
+	@Override
 	public List<Integer> readData(DataSource source) {
 		List<Integer> result = new ArrayList<>();
 		try {
