@@ -2,111 +2,94 @@ package user;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import java.util.Collections;
-import java.util.List;
+import storage.StorageComputeAPI;
+import compute.ComputationAPI;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+
+import java.util.Arrays;
+import java.util.List;
 
 class TestUserComputeAPI {
     @Test
-    void testSubmitJobWithValidInput() {
-        storage.StorageComputeAPI storageAPI = Mockito.mock(storage.StorageComputeAPI.class);
-        compute.ComputationAPI computeAPI = Mockito.mock(compute.ComputationAPI.class);
-        UserComputeImpl userCompute = new UserComputeImpl(storageAPI, computeAPI);
+    void testSubmitJobSuccess() {
+        StorageComputeAPI storageAPI = Mockito.mock(StorageComputeAPI.class);
+        ComputationAPI computationAPI = Mockito.mock(ComputationAPI.class);
         DataSource source = Mockito.mock(DataSource.class);
-        DataDestination dest = Mockito.mock(DataDestination.class);
-        Mockito.when(storageAPI.readData(source)).thenReturn(List.of(1,2,3));
-        Mockito.when(computeAPI.processJob(List.of(1,2,3))).thenReturn(List.of(4,5,6));
-        Mockito.when(storageAPI.writeData(List.of(4,5,6))).thenReturn(true);
-        boolean result = userCompute.submitJob(source, dest, ",");
-        assertTrue(result, "submitJob should return true for valid input");
+        DataDestination destination = Mockito.mock(DataDestination.class);
+        List<Integer> inputData = Arrays.asList(7, 8); // Encoded for "AB"
+        Mockito.when(storageAPI.readData(source)).thenReturn(inputData);
+        Mockito.when(computationAPI.compute(inputData)).thenReturn("AB");
+        Mockito.when(storageAPI.writeData(destination, "AB", ",")).thenReturn(true);
+        UserComputeImpl userCompute = new UserComputeImpl(storageAPI, computationAPI);
+        boolean result = userCompute.submitJob(source, destination, ",");
+        assertTrue(result);
+        Mockito.verify(storageAPI).readData(source);
+        Mockito.verify(computationAPI).compute(inputData);
+        Mockito.verify(storageAPI).writeData(destination, "AB", ",");
     }
 
     @Test
-    void testSubmitJobWithEmptyInputData() {
-        storage.StorageComputeAPI storageAPI = Mockito.mock(storage.StorageComputeAPI.class);
-        compute.ComputationAPI computeAPI = Mockito.mock(compute.ComputationAPI.class);
-        UserComputeImpl userCompute = new UserComputeImpl(storageAPI, computeAPI);
+    void testSubmitJobWriteFails() {
+        StorageComputeAPI storageAPI = Mockito.mock(StorageComputeAPI.class);
+        ComputationAPI computationAPI = Mockito.mock(ComputationAPI.class);
         DataSource source = Mockito.mock(DataSource.class);
-        DataDestination dest = Mockito.mock(DataDestination.class);
-        Mockito.when(storageAPI.readData(source)).thenReturn(Collections.emptyList());
-        boolean result = userCompute.submitJob(source, dest, ",");
-        assertFalse(result, "submitJob should return false for empty input data");
+        DataDestination destination = Mockito.mock(DataDestination.class);
+        List<Integer> inputData = Arrays.asList(7, 8);
+        Mockito.when(storageAPI.readData(source)).thenReturn(inputData);
+        Mockito.when(computationAPI.compute(inputData)).thenReturn("AB");
+        Mockito.when(storageAPI.writeData(destination, "AB", ",")).thenReturn(false);
+        UserComputeImpl userCompute = new UserComputeImpl(storageAPI, computationAPI);
+        boolean result = userCompute.submitJob(source, destination, ",");
+        assertFalse(result);
     }
 
     @Test
-    void testSubmitJobWithNullInputData() {
-        storage.StorageComputeAPI storageAPI = Mockito.mock(storage.StorageComputeAPI.class);
-        compute.ComputationAPI computeAPI = Mockito.mock(compute.ComputationAPI.class);
-        UserComputeImpl userCompute = new UserComputeImpl(storageAPI, computeAPI);
+    void testSubmitJobThrowsOnNullSource() {
+        StorageComputeAPI storageAPI = Mockito.mock(StorageComputeAPI.class);
+        ComputationAPI computationAPI = Mockito.mock(ComputationAPI.class);
+        DataDestination destination = Mockito.mock(DataDestination.class);
+        UserComputeImpl userCompute = new UserComputeImpl(storageAPI, computationAPI);
+        assertThrows(IllegalArgumentException.class, () -> userCompute.submitJob(null, destination, ","));
+    }
+
+    @Test
+    void testSubmitJobThrowsOnNullDestination() {
+        StorageComputeAPI storageAPI = Mockito.mock(StorageComputeAPI.class);
+        ComputationAPI computationAPI = Mockito.mock(ComputationAPI.class);
         DataSource source = Mockito.mock(DataSource.class);
-        DataDestination dest = Mockito.mock(DataDestination.class);
-        Mockito.when(storageAPI.readData(source)).thenReturn(null);
-        boolean result = userCompute.submitJob(source, dest, ",");
-        assertFalse(result, "submitJob should return false for null input data");
+        UserComputeImpl userCompute = new UserComputeImpl(storageAPI, computationAPI);
+        assertThrows(IllegalArgumentException.class, () -> userCompute.submitJob(source, null, ","));
     }
 
     @Test
-    void testSubmitJobWithNullResults() {
-        storage.StorageComputeAPI storageAPI = Mockito.mock(storage.StorageComputeAPI.class);
-        compute.ComputationAPI computeAPI = Mockito.mock(compute.ComputationAPI.class);
-        UserComputeImpl userCompute = new UserComputeImpl(storageAPI, computeAPI);
+    void testSubmitJobThrowsOnNullDelimiter() {
+        StorageComputeAPI storageAPI = Mockito.mock(StorageComputeAPI.class);
+        ComputationAPI computationAPI = Mockito.mock(ComputationAPI.class);
         DataSource source = Mockito.mock(DataSource.class);
-        DataDestination dest = Mockito.mock(DataDestination.class);
-        Mockito.when(storageAPI.readData(source)).thenReturn(List.of(1,2,3));
-        Mockito.when(computeAPI.processJob(List.of(1,2,3))).thenReturn(null);
-        boolean result = userCompute.submitJob(source, dest, ",");
-        assertFalse(result, "submitJob should return false if processJob returns null");
+        DataDestination destination = Mockito.mock(DataDestination.class);
+        UserComputeImpl userCompute = new UserComputeImpl(storageAPI, computationAPI);
+        assertThrows(IllegalArgumentException.class, () -> userCompute.submitJob(source, destination, null));
     }
 
     @Test
-    void testSubmitJobWithWriteFailure() {
-        storage.StorageComputeAPI storageAPI = Mockito.mock(storage.StorageComputeAPI.class);
-        compute.ComputationAPI computeAPI = Mockito.mock(compute.ComputationAPI.class);
-        UserComputeImpl userCompute = new UserComputeImpl(storageAPI, computeAPI);
-        DataSource source = Mockito.mock(DataSource.class);
-        DataDestination dest = Mockito.mock(DataDestination.class);
-        Mockito.when(storageAPI.readData(source)).thenReturn(List.of(1,2,3));
-        Mockito.when(computeAPI.processJob(List.of(1,2,3))).thenReturn(List.of(4,5,6));
-        Mockito.when(storageAPI.writeData(List.of(4,5,6))).thenReturn(false);
-        boolean result = userCompute.submitJob(source, dest, ",");
-        assertFalse(result, "submitJob should return false if writeData fails");
+    void testSetDelimiterValid() {
+        StorageComputeAPI storageAPI = Mockito.mock(StorageComputeAPI.class);
+        ComputationAPI computationAPI = Mockito.mock(ComputationAPI.class);
+        UserComputeImpl userCompute = new UserComputeImpl(storageAPI, computationAPI);
+        String delimiter = userCompute.setDelimiter("|");
+        assertEquals("|", delimiter);
     }
 
     @Test
-    void testSetInputSourceReturnsSource() {
-        UserComputeImpl userCompute = new UserComputeImpl(null, null);
-        DataSource source = Mockito.mock(DataSource.class);
-        assertSame(source, userCompute.setInputSource(source), "setInputSource should return the source");
-    }
-
-    @Test
-    void testSetOutputDestinationReturnsDestination() {
-        UserComputeImpl userCompute = new UserComputeImpl(null, null);
-        DataDestination dest = Mockito.mock(DataDestination.class);
-        assertSame(dest, userCompute.setOutputDestination(dest), "setOutputDestination should return the destination");
-    }
-
-    @Test
-    void testSetDelimitersReturnsDelimiter() {
-        UserComputeImpl userCompute = new UserComputeImpl(null, null);
-        assertEquals(",", userCompute.setDelimiters(","), "setDelimiters should return the delimiter");
-    }
-
-    @Test
-    void testGetResultsReturnsEmptyList() {
-        UserComputeImpl userCompute = new UserComputeImpl(null, null);
-        List<String> results = userCompute.getResults();
-        assertTrue(results.isEmpty(), "getResults should return empty list");
-    }
-
-    @Test
-    void testExecuteJobReturnsNull() {
-        UserComputeImpl userCompute = new UserComputeImpl(null, null);
-        DataSource source = Mockito.mock(DataSource.class);
-        assertNull(userCompute.executeJob(source), "executeJob should return null");
+    void testSetDelimiterThrowsOnNullOrEmpty() {
+        StorageComputeAPI storageAPI = Mockito.mock(StorageComputeAPI.class);
+        ComputationAPI computationAPI = Mockito.mock(ComputationAPI.class);
+        UserComputeImpl userCompute = new UserComputeImpl(storageAPI, computationAPI);
+        assertThrows(IllegalArgumentException.class, () -> userCompute.setDelimiter(null));
+        assertThrows(IllegalArgumentException.class, () -> userCompute.setDelimiter("   "));
     }
 }

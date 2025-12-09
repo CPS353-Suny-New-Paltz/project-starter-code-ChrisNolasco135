@@ -1,6 +1,5 @@
 package testsupport;
 
-
 import storage.StorageComputeAPI;
 import user.DataDestination;
 import user.DataSource;
@@ -10,6 +9,7 @@ import java.util.List;
 public class InMemoryStorageComputeAPI implements StorageComputeAPI {
     private final InMemoryDataSource source;
     private final InMemoryDataDestination destination;
+    private String delimiter = ",";
 
     public InMemoryStorageComputeAPI(InMemoryDataSource source, InMemoryDataDestination destination) {
         this.source = source;
@@ -18,34 +18,31 @@ public class InMemoryStorageComputeAPI implements StorageComputeAPI {
 
     @Override
     public List<Integer> readData(DataSource data) {
-        // Just return the in-memory input list;
+        if (source == null || source.getInputData() == null || source.getInputData().isEmpty()) {
+            throw new IllegalArgumentException("DataSource must not be null or empty");
+        }
         return source.getInputData();
     }
 
     @Override
-    public boolean writeData(List<Integer> data) {
-        destination.getOutputData().clear(); // Clear previous output
-        for (Integer num : data) {
-            destination.addOutput(num.toString());
-        }
-        return true; // Always succeed in test mode
+    public boolean writeData(DataDestination destination, String data) {
+        return writeData(destination, data, ",");
     }
 
-	@Override
-	public void setSource(DataSource source) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setDestination(DataDestination destination) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setDelimiter(String delimiter) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public boolean writeData(DataDestination destination, String data, String delimiter) {
+        if (data == null || destination == null || delimiter == null || delimiter.trim().isEmpty()) {
+            throw new IllegalArgumentException("Data, destination, and delimiter must not be null or empty");
+        }
+        try {
+            testsupport.InMemoryDataDestination memDest = (testsupport.InMemoryDataDestination) destination;
+            memDest.getOutputData().clear();
+            for (int i = 0; i < data.length(); i++) {
+                memDest.addOutput(String.valueOf(data.charAt(i)));
+            }
+            return true;
+        } catch (ClassCastException e) {
+            throw new IllegalArgumentException("Invalid DataDestination type: " + e.getMessage());
+        }
+    }
 }
