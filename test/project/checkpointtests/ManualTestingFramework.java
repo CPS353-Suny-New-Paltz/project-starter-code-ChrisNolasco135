@@ -15,7 +15,7 @@ public class ManualTestingFramework {
         // Instantiate a real (ie, class definition lives in the src/ folder) implementation 
         // of all 3 APIs
         ComputationImpl computationAPI = new ComputationImpl();
-        StorageComputeImpl storageAPI = new StorageComputeImpl(computationAPI);
+        StorageComputeImpl storageAPI = new StorageComputeImpl();
         UserComputeImpl userAPI = new UserComputeImpl(storageAPI, computationAPI);
 
         // TODO 2:
