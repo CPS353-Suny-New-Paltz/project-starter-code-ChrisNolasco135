@@ -15,17 +15,8 @@ public class UserComputeImpl implements UserComputeAPI {
 
     @Override
     public boolean submitJob(DataSource source, DataDestination destination, String delimiter) {
-        if (source == null || destination == null || delimiter == null) {
-            throw new IllegalArgumentException("DataSource, DataDestination or Delimiter must not be null");
-        }
         setDelimiter(delimiter);
-        // Read input as List<Integer> from DataSource
-        List<Integer> inputData = storageAPI.readData(source);
-        // Compute the result using the full list
-        String result = computeAPI.compute(inputData);
-        // Write the result as a single line, separated by the delimiter
-        boolean writeSuccess = storageAPI.writeData(destination, result, delimiter);
-        return writeSuccess;
+        return UserComputeUtil.processJob(storageAPI, computeAPI, source, destination, delimiter);
     }
     
     public String setDelimiter(String delimiter) {
