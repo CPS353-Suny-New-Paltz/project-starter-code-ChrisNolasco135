@@ -6,7 +6,6 @@ import project.annotations.ConceptualAPI;
 
 @ConceptualAPI
 public interface ComputationAPI {
-	ComputeResult compute(ComputeRequest request);
-
-	List<Integer> processJob(List<Integer> inputData);
+	String compute(List<Integer> input);
+	
 }
