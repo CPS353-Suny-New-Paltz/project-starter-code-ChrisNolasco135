@@ -1,5 +1,7 @@
 package user;
 
+import java.util.List;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -21,11 +23,35 @@ public class UserComputeMultiThreadedImpl implements UserComputeAPI {
     @Override
     public boolean submitJob(DataSource source, DataDestination destination, String delimiter) {
         setDelimiter(delimiter);
-        Future<Boolean> future = threadPool.submit(() ->
-            UserComputeUtil.processJob(storageAPI, computeAPI, source, destination, delimiter)
-        );
+        // Read input as List<Integer> from DataSource
+        List<Integer> inputData = storageAPI.readData(source);
+        if (inputData == null || inputData.isEmpty()) {
+            throw new IllegalArgumentException("Input data must not be empty");
+        }
         try {
-            return future.get();
+            // Submit a decoding task for each integer
+            List<Future<String>> futures = new ArrayList<>();
+            for (Integer encodedValue : inputData) {
+                futures.add(threadPool.submit(() -> {
+                    if (encodedValue == null) {
+                    	return "";
+                    }
+                    int shift = 7;
+                    int mod = 27;
+                    int decodedValue = (encodedValue - shift + mod) % mod;
+                    char letter = (decodedValue == 26) ? ' ' : (char) ('A' + decodedValue);
+                    return String.valueOf(letter);
+                }));
+            }
+            // Collect results in order
+            List<String> decodedList = new ArrayList<>();
+            for (Future<String> future : futures) {
+                decodedList.add(future.get());
+            }
+            // Join results with delimiter
+            String result = String.join(delimiter, decodedList);
+            // Write the result as a single line
+            return storageAPI.writeData(destination, result, delimiter);
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException("Job execution failed", e);
         }
