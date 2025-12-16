@@ -33,10 +33,12 @@ public class UserComputeMultiThreadedImpl implements UserComputeAPI {
             List<Future<String>> futures = new ArrayList<>();
             for (Integer encodedValue : inputData) {
                 futures.add(threadPool.submit(() -> {
-                    if (encodedValue == null) return "";
-                    int SHIFT = 7;
-                    int MOD = 27;
-                    int decodedValue = (encodedValue - SHIFT + MOD) % MOD;
+                    if (encodedValue == null) {
+                    	return "";
+                    }
+                    int shift = 7;
+                    int mod = 27;
+                    int decodedValue = (encodedValue - shift + mod) % mod;
                     char letter = (decodedValue == 26) ? ' ' : (char) ('A' + decodedValue);
                     return String.valueOf(letter);
                 }));
